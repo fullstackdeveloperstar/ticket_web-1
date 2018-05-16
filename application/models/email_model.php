@@ -10,11 +10,11 @@ class Email_model extends CI_Model
         parent::__construct();
     }
 
-	public function sendEmail(){
+	public function sendEmail($email, $subject = "", $body = ""){
 		
 		$mail = new PHPMailer(); // create a new object
 		$mail->IsSMTP(); // enable SMTP
-		$mail->SMTPDebug = 1; // debugging: 1 = errors and messages, 2 = messages only
+		// $mail->SMTPDebug = 1; // debugging: 1 = errors and messages, 2 = messages only
 		$mail->SMTPAuth = true; // authentication enabled
 		$mail->SMTPSecure = 'ssl'; // secure transfer enabled REQUIRED for Gmail
 		$mail->Host = "smtp.gmail.com";
@@ -23,14 +23,14 @@ class Email_model extends CI_Model
 		$mail->Username = "rubby.star.sg@gmail.com";
 		$mail->Password = "soksunae";
 		$mail->SetFrom("rubby.star.sg@gmail.com");
-		$mail->Subject = "Test";
-		$mail->Body = "hello";
-		$mail->AddAddress("rubby.star@hotmail.com");
+		$mail->Subject = $subject;
+		$mail->Body = $body;
+		$mail->AddAddress($email);
 
 		 if(!$mail->Send()) {
-		    echo "Mailer Error: " . $mail->ErrorInfo;
+		   return false;
 		 } else {
-		    echo "Message has been sent";
+		    return true;
 		 }
 	}
 }

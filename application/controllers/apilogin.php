@@ -127,6 +127,88 @@ class Apilogin extends CI_Controller
         
     }
 
+    public function forgotpassword() 
+    {
+        $status = '';
+        
+        $this->form_validation->set_rules('email','Email','trim|required|valid_email|xss_clean');
+                
+        if($this->form_validation->run() == FALSE)
+        {
+            $data['success'] = false;
+            $data['msg'] = "Email is needed!";
+            echo json_encode($data);
+            exit();
+        }
+        else 
+        {
+            $email = $this->input->post('email');
+            
+            if($this->login_model->checkEmailExist($email))
+            {
+                $encoded_email = urlencode($email);
+                
+                $this->load->helper('string');
+                $data['email'] = $email;
+                $data['activation_id'] = random_string('alnum',15);
+                $data['createdDtm'] = date('Y-m-d H:i:s');
+                $data['agent'] = getBrowserAgent();
+                $data['client_ip'] = $this->input->ip_address();
+                
+                $save = $this->login_model->resetPasswordUser($data);                
+                
+                if($save)
+                {
+                    $data1['reset_link'] = base_url() . "resetPasswordConfirmUser/" . $data['activation_id'] . "/" . $encoded_email;
+                    $userInfo = $this->login_model->getCustomerInfoByEmail($email);
+
+                    if(!empty($userInfo)){
+                        $data1["name"] = $userInfo[0]->name;
+                        $data1["email"] = $userInfo[0]->email;
+                        $data1["message"] = "Reset Your Password";
+                    }
+
+                    // $sendStatus = resetPasswordEmail($data1);
+
+                    $sendStatus = $this->email_model->sendEmail($userInfo[0]->email, "Forgot Password",  $data1['reset_link']);                    
+
+                    if($sendStatus){
+                        // $status = "send";
+                        // setFlashData($status, "Reset password link sent successfully, please check mails.");
+                        $data['success'] = true;
+                        $data['msg'] = "Email is sent";
+                        echo json_encode($data);
+                        exit();
+                    } else {
+                        $data['success'] = false;
+                        $data['msg'] = "Email has been failed, try again.";
+                        echo json_encode($data);
+                        exit();
+                    }
+                }
+                else
+                {
+                    // $status = 'unable';
+                    // setFlashData($status, "It seems an error while sending your details, try again.");
+                    $data['success'] = false;
+                    $data['msg'] = "It seems an error while sending your details, try again.";
+                    echo json_encode($data);
+                    exit();
+                }
+            }
+            else
+            {
+                // $status = 'invalid';
+                // setFlashData($status, "This email is not registered with us.");
+                $data['success'] = false;
+                $data['msg'] = "This email is not registered with us.";
+                echo json_encode($data);
+                exit();
+            }
+           
+        }
+    }
+
   //   public function isLoggedIn(){
   //   	$isLoggedIn = $this->session->userdata ( 'isLoggedIn' );
 		
@@ -139,10 +221,10 @@ class Apilogin extends CI_Controller
 		// }
   //   }
 
-    public function sendEmail()
-    {
-       $this->email_model->sendEmail();
+    // public function sendEmail()
+    // {
+    //    $this->email_model->sendEmail();
 
-    }
+    // }
 
 }

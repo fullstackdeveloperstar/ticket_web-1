@@ -35,7 +35,8 @@ $route['createPasswordUser'] = "login/createPasswordUser";
 // api routes
 $route['api/login'] = "apilogin/index";
 $route['api/signup'] = "apilogin/signup";
+$route['api/forgotpassword'] = 'apilogin/forgotpassword';
 
 
 $route['api/isloggedin'] = "apilogin/isLoggedIn";
-$route['sendmail'] = "apilogin/sendEmail";
+// $route['sendmail'] = "apilogin/sendEmail";
