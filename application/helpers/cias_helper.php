@@ -112,7 +112,7 @@ if(!function_exists('emailConfig'))
         $config['protocol'] = PROTOCOL;
         $config['smtp_host'] = SMTP_HOST;
         $config['smtp_port'] = SMTP_PORT;
-        $config['mailpath'] = MAIL_PATH;
+        // $config['mailpath'] = MAIL_PATH;
         $config['charset'] = 'UTF-8';
         $config['mailtype'] = "html";
         $config['newline'] = "\r\n";
