@@ -39,4 +39,5 @@ $route['api/forgotpassword'] = 'apilogin/forgotpassword';
 
 
 $route['api/isloggedin'] = "apilogin/isLoggedIn";
+$route['api'] = 'Apiuser/index';
 // $route['sendmail'] = "apilogin/sendEmail";

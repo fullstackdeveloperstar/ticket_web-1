@@ -7,6 +7,9 @@ class User_model extends CI_Model
      * @param string $searchText : This is optional search text
      * @return number $count : This is row count
      */
+
+    public $table_name = "tbl_users";
+
     function userListingCount($searchText = '')
     {
         $this->db->select('BaseTbl.userId, BaseTbl.email, BaseTbl.name, BaseTbl.mobile, Role.role');
@@ -186,6 +189,20 @@ class User_model extends CI_Model
         $this->db->update('tbl_users', $userInfo);
         
         return $this->db->affected_rows();
+    }
+
+    function getUserByToken($token)
+    {
+        $this->db->where('user_token', $token);
+        $query =  $this->db->get($this->table_name);
+        $result = $query->result_array();
+
+        if (count($result) > 0){
+            return $result[0];
+        }
+        else {
+            return false;
+        }
     }
 }
 
