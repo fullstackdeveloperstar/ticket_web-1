@@ -8,11 +8,16 @@ login
 			"success":true,
 			"user":
 			{
-				"userId":"7",
+				"userId":"4",
+				"password":"$2y$10$t7sVZgFTt0aRlGgXg89Xn.S702Q33HNt932bsRJRue.h.EYmvDMlW",
 				"name":null,
 				"roleId":"3",
 				"role":"Employee",
-				"user_token":"5afba87a4ba42"
+				"user_token":"5afba6d5109e0",
+				"fname":"rubby",
+				"lname":"star",
+				"profile_image":"http:\/\/localhost\/assets\/uploads\/user_profile\/FA-A39450-2.jpg",
+				"createdDtm":"2018-05-16 05:34:45"
 			}
 		}
 
