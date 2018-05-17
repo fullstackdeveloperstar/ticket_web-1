@@ -13,6 +13,7 @@ class Apievent extends Apibase
         $this->load->model('event_model');
         $this->load->model('ticket_model');
         $this->load->model('org_model');
+        $this->load->model('event_like_model');
     }
 
     public function index()
@@ -23,13 +24,15 @@ class Apievent extends Apibase
        {
             $tickets = $this->ticket_model->getTickets($event["event_id"]);
             $org = $this->org_model->getOrg($event["event_org_id"]);
+            $isliked = $this->event_like_model->isLiked($this->user['userId'], $event['event_id']);
             $events[$key]['tickets'] = $tickets;
             $events[$key]['org'] = $org;
+            $events[$key]['is_liked'] = $isliked;
        }
-       // echo json_encode($events);
-       $data['success'] = true;
-       $data['events'] = $events;
-       echo json_encode($data);
+       echo json_encode($events);
+       // $data['success'] = true;
+       // $data['events'] = $events;
+       // echo json_encode($data);
     }
 
     public function getLikedEventsList()
