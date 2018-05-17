@@ -2,7 +2,7 @@ login
 
 	-post http://159.203.99.60/api/login
 	-request
-		email, password
+		email, password, device_token
 	-response
 		{
 			"success":true,
@@ -26,7 +26,7 @@ signup
 
 	-post http://159.203.99.60/api/signup
 	-request 
-		fname, lname, email, password, cpassword
+		fname, lname, email, password, cpassword, device_token
 	-response
 		{
 			"success":false,
@@ -55,3 +55,38 @@ forgot password
 			"success":true,
 			"msg":"Email is sent"
 		}
+
+#users api
+
+myapi
+	
+	-get http://159.203.99.60/api/user/myinfo
+	-header
+		token
+	-response
+		{
+			"userId":"4",
+			"email":"rubby.star@hotmail.com",
+			"name":null,
+			"fname":"rubby",
+			"lname":"star",
+			"mobile":null,
+			"roleId":"3",
+			"user_token":"5afba6d5109e0",
+			"profile_image":"http:\/\/localhost\/assets\/uploads\/user_profile\/FA-A39450-2.jpg",
+			"device_token":"123123",
+			"isDeleted":"0",
+			"createdBy":"-1",
+			"createdDtm":"2018-05-16 05:34:45",
+			"updatedBy":null,
+			"updatedDtm":null
+		}
+
+event list
+	
+	-get 
+
+	-request
+		header: token
+
+		

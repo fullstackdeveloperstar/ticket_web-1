@@ -17,6 +17,7 @@ class Apilogin extends CI_Controller
     {    
         $this->form_validation->set_rules('email', 'Email', 'required|valid_email|max_length[128]|xss_clean|trim');
         $this->form_validation->set_rules('password', 'Password', 'required|max_length[32]|');
+        $this->form_validation->set_rules('device_token', 'Device_token', 'required|max_length[32]|');
 
         if($this->form_validation->run() == FALSE)
         {
@@ -30,6 +31,7 @@ class Apilogin extends CI_Controller
         {
             $email = $this->input->post('email');
             $password = $this->input->post('password');
+            $device_token = $this->input->post('device_token');
             
             $result = $this->login_model->loginMe($email, $password);
             
@@ -42,7 +44,7 @@ class Apilogin extends CI_Controller
                         $key = uniqid();
                     }
 
-                    $this->user_model->editUser(array('user_token' => $key), $res->userId);
+                    $this->user_model->editUser(array('user_token' => $key, 'device_token'=>$device_token), $res->userId);
                     $res->user_token = $key;
                     $sessionArray = array('userId'=>$res->userId,                    
                                           'role'=>$res->roleId,
@@ -79,11 +81,12 @@ class Apilogin extends CI_Controller
         $this->form_validation->set_rules('email','Email','trim|required|valid_email|xss_clean|max_length[128]');
         $this->form_validation->set_rules('password','Password','required|max_length[20]');
         $this->form_validation->set_rules('cpassword','Confirm Password','trim|required|matches[password]|max_length[20]');
+        $this->form_validation->set_rules('device_token', 'Device_token', 'required|max_length[32]|');
         
         if($this->form_validation->run() == FALSE)
         {
             $data['success'] = false;
-            $data['msg'] = "Cridential is required!";
+            $data['msg'] = "All data is required!";
             echo json_encode($data);
             exit();
         }
@@ -93,6 +96,7 @@ class Apilogin extends CI_Controller
             $lname = ucwords(strtolower($this->input->post('lname')));
             $email = $this->input->post('email');
             $password = $this->input->post('password');
+            $device_token = $this->input->post('device_token');
             
             $checkUserExist = $this->user_model->checkEmailExists($email);
             if(count($checkUserExist) > 0){
@@ -102,7 +106,7 @@ class Apilogin extends CI_Controller
                 exit();
             }
 
-            $userInfo = array('email'=>$email, 'password'=>getHashedPassword($password), 'roleId'=>3, 'fname'=>$fname, 'lname' => $lname, 'createdBy'=> -1, 'createdDtm'=>date('Y-m-d H:i:s'), 'user_token' => uniqid());
+            $userInfo = array('email'=>$email, 'password'=>getHashedPassword($password), 'roleId'=>3, 'fname'=>$fname, 'lname' => $lname, 'createdBy'=> -1, 'createdDtm'=>date('Y-m-d H:i:s'), 'user_token' => uniqid(), 'device_token'=> $device_token);
             
 
             $result = $this->user_model->addNewUser($userInfo);
