@@ -12,6 +12,7 @@ class Apievent extends Apibase
         parent::__construct();
         $this->load->model('event_model');
         $this->load->model('ticket_model');
+        $this->load->model('org_model');
     }
 
     public function index()
@@ -21,7 +22,9 @@ class Apievent extends Apibase
        foreach ($events as $key => $event) 
        {
             $tickets = $this->ticket_model->getTickets($event["event_id"]);
+            $org = $this->org_model->getOrg($event["event_org_id"]);
             $events[$key]['tickets'] = $tickets;
+            $events[$key]['org'] = $org;
        }
        echo json_encode($events);
     }

@@ -126,7 +126,16 @@ event list
 						"ticket_event_id":"1",
 						"ticket_created_dtm":"2018-05-17 07:59:34"
 					}
-				]
+				],
+				"org":
+					{
+						"org_id":"1",
+						"org_email":"testort1@mail.com",
+						"org_name":"test Org",
+						"org_image":"http:\/\/localhost\/assets\/uploads\/org_image\/test.png",
+						"org_description":"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+						"org_created_dtm":"2018-05-17 15:20:02"
+					}
 			},
 			{...}
 		]
