@@ -17,12 +17,12 @@ class Apilogin extends CI_Controller
     {    
         $this->form_validation->set_rules('email', 'Email', 'required|valid_email|max_length[128]|xss_clean|trim');
         $this->form_validation->set_rules('password', 'Password', 'required|max_length[32]|');
-        $this->form_validation->set_rules('device_token', 'Device_token', 'required|max_length[32]|');
+        $this->form_validation->set_rules('device_token', 'Device_token', 'required|max_length[100]|');
 
         if($this->form_validation->run() == FALSE)
         {
         	$data['success'] = false;
-        	$data['msg'] = "Cridential is required!";
+        	$data['msg'] = "Cridential is required!!!";
             echo json_encode($data);
             exit();
         }
@@ -81,7 +81,7 @@ class Apilogin extends CI_Controller
         $this->form_validation->set_rules('email','Email','trim|required|valid_email|xss_clean|max_length[128]');
         $this->form_validation->set_rules('password','Password','required|max_length[20]');
         $this->form_validation->set_rules('cpassword','Confirm Password','trim|required|matches[password]|max_length[20]');
-        $this->form_validation->set_rules('device_token', 'Device_token', 'required|max_length[32]|');
+        $this->form_validation->set_rules('device_token', 'Device_token', 'required|max_length[100]|');
         
         if($this->form_validation->run() == FALSE)
         {

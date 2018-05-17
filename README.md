@@ -33,7 +33,7 @@ signup
 			"success":false,
 			"msg":"User already exists! Please try with other information!"
 		}
-		
+
 		{
 			"success":true,
 			"msg":"Signup is successed",
@@ -112,6 +112,8 @@ event list
 				"event_end_date_time":"2018-05-17 04:00:10",
 				"event_address1":"NYC rails 1234",
 				"event_address_2":"New York city , United States",
+				"event_lat":"0",
+				"event_long":"0"
 				"event_org_id":"1",
 				"event_created_dtm":"2018-05-17 05:55:02",
 				"tickets":[
@@ -119,13 +121,8 @@ event list
 						"ticket_id":"1",
 						"ticket_type":"type 1",
 						"ticket_price":"12.5",
-						"ticket_event_id":"1",
-						"ticket_created_dtm":"2018-05-17 07:59:34"
-					},
-					{
-						"ticket_id":"2",
-						"ticket_type":"type 2",
-						"ticket_price":"13",
+						"ticket_counts":"8",
+						"ticket_sold_counts":"5",
 						"ticket_event_id":"1",
 						"ticket_created_dtm":"2018-05-17 07:59:34"
 					}
