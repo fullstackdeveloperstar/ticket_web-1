@@ -42,6 +42,7 @@ $route['api/user/myinfo'] = "apiuser/index";
 $route['api/user/update'] = "apiuser/update";
 $route['api/user/update1'] = "apiuser/update1";
 $route['api/user/changepassword'] = 'apiuser/updatePassword';
+$route['api/user/countticketsandliked'] = 'apiuser/getTicketsAndLikedEventsCount';
 
 // event apis
 $route['api/event/getall'] = "apievent/index";

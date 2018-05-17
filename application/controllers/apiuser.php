@@ -10,6 +10,8 @@ class Apiuser extends Apibase
     public function __construct()
     {
         parent::__construct();
+        $this->load->model('event_like_model');
+        $this->load->model('ticket_puchase_model');
     }
 
     public function index()
@@ -133,6 +135,14 @@ class Apiuser extends Apibase
                 exit();
             }   
         }
+    }
+
+    public function getTicketsAndLikedEventsCount()
+    {
+        $data['like_count'] = $this->event_like_model->getCountLike($this->user['userId']);
+        $data['ticket_count'] = $this->ticket_puchase_model->getCountsTickets($this->user['userId']);
+        $data['success'] = true;
+        echo json_encode($data);
     }
 
 }

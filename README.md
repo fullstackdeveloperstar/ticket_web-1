@@ -155,6 +155,18 @@ change password
 			"msg":"Old Password is not mismatched"
 		}
 
+tickets and liked event counts
+	
+	-get http://159.203.99.60/api/user/countticketsandliked
+	-header
+		token
+	-response
+		{
+			"like_count":1,
+			"ticket_count":5,
+			"success":true
+		}
+
 event list
 	
 	-get http://159.203.99.60/api/event/getall
@@ -199,3 +211,4 @@ event list
 			},
 			{...}
 		]
+
