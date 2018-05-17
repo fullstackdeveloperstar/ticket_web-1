@@ -115,6 +115,7 @@ class Apilogin extends CI_Controller
             {
                 $data['success'] = true;
                 $data['msg'] = "Signup is successed";
+                $data['user'] = $userInfo;
                 echo json_encode($data);
                 exit();
             }

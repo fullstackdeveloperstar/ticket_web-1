@@ -14,8 +14,9 @@ login
 				"roleId":"3",
 				"role":"Employee",
 				"user_token":"5afba6d5109e0",
-				"fname":"rubby",
-				"lname":"star",
+				"fname": "rubby",
+				"lname": "star",
+				"email": "rubby.star@hotmail.com",
 				"profile_image":"http:\/\/localhost\/assets\/uploads\/user_profile\/FA-A39450-2.jpg",
 				"createdDtm":"2018-05-16 05:34:45"
 			}
@@ -32,10 +33,22 @@ signup
 			"success":false,
 			"msg":"User already exists! Please try with other information!"
 		}
-
+		
 		{
 			"success":true,
-			"msg":"Signup is successed"
+			"msg":"Signup is successed",
+			"user":
+				{
+					"email":"tttta@mail.coma",
+					"password":"$2y$10$YTQNFWdEkBirxc6RfC96YuqI2RnZd7wmuDfROcDR0YRgn3f\/A3OCK",
+					"roleId":3,
+					"fname":"Tttt",
+					"lname":"Ttttt",
+					"createdBy":-1,
+					"createdDtm":"2018-05-17 18:41:45",
+					"user_token":"5afdb0c946577",
+					"device_token":"aaaa"
+				}
 		}
 
 
