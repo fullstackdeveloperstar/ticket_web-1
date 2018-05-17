@@ -212,3 +212,51 @@ event list
 			{...}
 		]
 
+
+liked events list
+
+	-get http://159.203.99.60/api/event/liked
+	-header
+		token
+	-response
+		{  
+		   "liked_events":[  
+		      {  
+		         "event_id":"1",
+		         "event_title":"test Event Title",
+		         "event_description":"Our currency rankings show that the most popular Euro exchange rate is the USD to EUR rate. The currency code for Euros is EUR, and the currency symbol is \u20ac.",
+		         "event_image":"http:\/\/192.168.0.62\/assets\/uploads\/event_image\/test.png",
+		         "event_start_date_time":"2018-05-17 03:00:10",
+		         "event_end_date_time":"2018-05-17 04:00:10",
+		         "event_address1":"NYC rails 1234",
+		         "event_address_2":"New York city , United States",
+		         "event_lat":"0",
+		         "event_long":"0",
+		         "event_org_id":"1",
+		         "event_created_dtm":"2018-05-17 19:00:08",
+		         "evl_id":"1",
+		         "evl_event_id":"1",
+		         "evl_user_id":"4",
+		         "evl_created_dtm":"2018-05-17 19:17:42"
+		      },
+		      {  
+		         "event_id":"2",
+		         "event_title":"test Event Title",
+		         "event_description":"Our currency rankings show that the most popular Euro exchange rate is the USD to EUR rate. The currency code for Euros is EUR, and the currency symbol is \u20ac.",
+		         "event_image":"http:\/\/192.168.0.62\/assets\/uploads\/event_image\/test.png",
+		         "event_start_date_time":"2018-05-17 03:00:10",
+		         "event_end_date_time":"2018-05-17 04:00:10",
+		         "event_address1":"NYC rails 1234",
+		         "event_address_2":"New York city , United States",
+		         "event_lat":"0",
+		         "event_long":"0",
+		         "event_org_id":"2",
+		         "event_created_dtm":"2018-05-17 19:00:54",
+		         "evl_id":"2",
+		         "evl_event_id":"2",
+		         "evl_user_id":"4",
+		         "evl_created_dtm":"2018-05-17 19:41:45"
+		      }
+		   ],
+		   "success":true
+		}

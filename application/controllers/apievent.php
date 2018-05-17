@@ -28,4 +28,12 @@ class Apievent extends Apibase
        }
        echo json_encode($events);
     }
+
+    public function getLikedEventsList()
+    {
+        $data['liked_events'] = $this->event_model->getLikedEvents($this->user['userId']);
+        $data['success'] = true;
+
+        echo json_encode($data);
+    }
 }
