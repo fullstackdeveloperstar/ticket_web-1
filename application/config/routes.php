@@ -39,6 +39,8 @@ $route['api/forgotpassword'] = 'apilogin/forgotpassword';
 
 // user apis
 $route['api/user/myinfo'] = "apiuser/index";
+$route['api/user/update'] = "apiuser/update";
+$route['api/user/update1'] = "apiuser/update1";
 
 // event apis
 $route['api/event/getall'] = "apievent/index";

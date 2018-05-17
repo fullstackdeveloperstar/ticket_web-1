@@ -71,7 +71,7 @@ forgot password
 
 users api
 
-myapi
+myinfo
 	
 	-get http://159.203.99.60/api/user/myinfo
 	-header
@@ -94,6 +94,48 @@ myapi
 			"updatedBy":null,
 			"updatedDtm":null
 		}
+
+update
+
+	-post http://159.203.99.60/api/user/update
+	-header 
+		token
+	-request
+		fname, lname, email, profile_image
+	-response
+		{
+			"success":true,
+			"msg":"Upload success!"
+		}
+		or
+		{
+			"success":false,
+			"msg":"All data is required!"
+		}
+		or
+		{
+			"success":false,
+			"msg":"Update failure!"
+		}
+
+update1
+
+	-post http://159.203.99.60/api/user/update1
+	-header 
+		token
+	-request
+		fname, lname, email
+	-response
+		{
+			"success":true,
+			"msg":"Update success!"
+		}
+		or
+		{
+			"success":false,
+			"msg":"All data is required!"
+		}
+		
 
 event list
 	
