@@ -26,7 +26,10 @@ class Apievent extends Apibase
             $events[$key]['tickets'] = $tickets;
             $events[$key]['org'] = $org;
        }
-       echo json_encode($events);
+       // echo json_encode($events);
+       $data['success'] = true;
+       $data['events'] = $events;
+       echo json_encode($data);
     }
 
     public function getLikedEventsList()

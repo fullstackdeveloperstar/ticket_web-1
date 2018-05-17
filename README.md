@@ -174,43 +174,77 @@ event list
 	-request
 		header: token
 	-response
-		[
-			{
-				"event_id":"1",
-				"event_title":"test Event Title",
-				"event_description":"Our currency rankings show that the most popular Euro exchange rate is the USD to EUR rate. The currency code for Euros is EUR, and the currency symbol is \u20ac.",
-				"event_image":"http:\/\/localhost\/assets\/uploads\/event_image\/test.png",
-				"event_start_date_time":"2018-05-17 03:00:10",
-				"event_end_date_time":"2018-05-17 04:00:10",
-				"event_address1":"NYC rails 1234",
-				"event_address_2":"New York city , United States",
-				"event_lat":"0",
-				"event_long":"0"
-				"event_org_id":"1",
-				"event_created_dtm":"2018-05-17 05:55:02",
-				"tickets":[
-					{
-						"ticket_id":"1",
-						"ticket_type":"type 1",
-						"ticket_price":"12.5",
-						"ticket_counts":"8",
-						"ticket_sold_counts":"5",
-						"ticket_event_id":"1",
-						"ticket_created_dtm":"2018-05-17 07:59:34"
-					}
-				],
-				"org":
-					{
-						"org_id":"1",
-						"org_email":"testort1@mail.com",
-						"org_name":"test Org",
-						"org_image":"http:\/\/localhost\/assets\/uploads\/org_image\/test.png",
-						"org_description":"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
-						"org_created_dtm":"2018-05-17 15:20:02"
-					}
-			},
-			{...}
-		]
+		{  
+		   "success":true,
+		   "events":[  
+		      {  
+		         "event_id":"1",
+		         "event_title":"test Event Title",
+		         "event_description":"Our currency rankings show that the most popular Euro exchange rate is the USD to EUR rate. The currency code for Euros is EUR, and the currency symbol is \u20ac.",
+		         "event_image":"http:\/\/192.168.0.62\/assets\/uploads\/event_image\/test.png",
+		         "event_start_date_time":"2018-05-17 03:00:10",
+		         "event_end_date_time":"2018-05-17 04:00:10",
+		         "event_address1":"NYC rails 1234",
+		         "event_address_2":"New York city , United States",
+		         "event_lat":"0",
+		         "event_long":"0",
+		         "event_org_id":"1",
+		         "event_created_dtm":"2018-05-17 19:00:08",
+		         "tickets":[  
+		            {  
+		               "ticket_id":"1",
+		               "ticket_type":"type 1",
+		               "ticket_price":"12.5",
+		               "ticket_counts":"10",
+		               "ticket_sold_counts":"2",
+		               "ticket_event_id":"1",
+		               "ticket_created_dtm":"2018-05-17 14:53:03"
+		            }
+		         ],
+		         "org":{  
+		            "org_id":"1",
+		            "org_email":"testort1@mail.com",
+		            "org_name":"test Org",
+		            "org_image":"http:\/\/192.168.0.62\/assets\/uploads\/org_image\/test.png",
+		            "org_description":"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+		            "org_created_dtm":"2018-05-17 19:01:11"
+		         }
+		      },
+		      {  
+		         "event_id":"2",
+		         "event_title":"test Event Title",
+		         "event_description":"Our currency rankings show that the most popular Euro exchange rate is the USD to EUR rate. The currency code for Euros is EUR, and the currency symbol is \u20ac.",
+		         "event_image":"http:\/\/192.168.0.62\/assets\/uploads\/event_image\/test.png",
+		         "event_start_date_time":"2018-05-17 03:00:10",
+		         "event_end_date_time":"2018-05-17 04:00:10",
+		         "event_address1":"NYC rails 1234",
+		         "event_address_2":"New York city , United States",
+		         "event_lat":"0",
+		         "event_long":"0",
+		         "event_org_id":"2",
+		         "event_created_dtm":"2018-05-17 19:00:54",
+		         "tickets":[  
+		            {  
+		               "ticket_id":"2",
+		               "ticket_type":"type 2",
+		               "ticket_price":"13",
+		               "ticket_counts":"8",
+		               "ticket_sold_counts":"5",
+		               "ticket_event_id":"2",
+		               "ticket_created_dtm":"2018-05-17 14:53:18"
+		            }
+		         ],
+		         "org":{  
+		            "org_id":"2",
+		            "org_email":"tesorg2@mail.com",
+		            "org_name":"Org 2",
+		            "org_image":"http:\/\/192.168.0.62\/assets\/uploads\/org_image\/test.png",
+		            "org_description":"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+		            "org_created_dtm":"2018-05-17 19:01:23"
+		         }
+		      }
+		   ]
+		}
 
 
 liked events list
