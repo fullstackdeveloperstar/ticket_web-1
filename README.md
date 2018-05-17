@@ -137,6 +137,24 @@ update1
 		}
 		
 
+change password
+	
+	-post http://159.203.99.60/api/user/changepassword
+	-header 
+		token
+	-request
+		oldpassword, password, cpassword
+	-response
+		{
+			"success":true,
+			"msg":"Password is chnaged"
+		}
+		or
+		{
+			"success":false,
+			"msg":"Old Password is not mismatched"
+		}
+
 event list
 	
 	-get http://159.203.99.60/api/event/getall

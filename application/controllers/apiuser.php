@@ -97,4 +97,42 @@ class Apiuser extends Apibase
         }
     }
 
+    public function updatePassword()
+    {
+        $this->form_validation->set_rules('oldpassword','Old Password','required|max_length[20]');
+        $this->form_validation->set_rules('password','Password','required|max_length[20]');
+        $this->form_validation->set_rules('cpassword','Confirm Password','trim|required|matches[password]|max_length[20]');
+
+        if($this->form_validation->run() == FALSE)
+        {
+            $data['success'] = false;
+            $data['msg'] = "All data is required!";
+            echo json_encode($data);
+            exit();
+        }
+        else
+        {
+            $password = $this->input->post('password');
+            $oldpassword = $this->input->post('oldpassword');
+
+            if(!verifyHashedPassword($oldpassword, $this->user['password']))
+            {
+                $data['success'] = false;
+                $data['msg'] = "Old Password is not mismatched";
+                echo json_encode($data);
+                exit();
+            }
+            else
+            {
+                $data['password'] = getHashedPassword($password);
+                $this->user_model->editUser($data, $this->user['userId']);
+
+                $return_data['success'] = true;
+                $return_data['msg'] = "Password is chnaged";
+                echo json_encode($return_data);
+                exit();
+            }   
+        }
+    }
+
 }
