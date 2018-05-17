@@ -56,7 +56,7 @@ forgot password
 			"msg":"Email is sent"
 		}
 
-##users api
+users api
 
 myapi
 	
@@ -84,9 +84,39 @@ myapi
 
 event list
 	
-	-get 
+	-get http://159.203.99.60/api/event/getall
 
 	-request
 		header: token
-
-		
+	-response
+		[
+			{
+				"event_id":"1",
+				"event_title":"test Event Title",
+				"event_description":"Our currency rankings show that the most popular Euro exchange rate is the USD to EUR rate. The currency code for Euros is EUR, and the currency symbol is \u20ac.",
+				"event_image":"http:\/\/localhost\/assets\/uploads\/event_image\/test.png",
+				"event_start_date_time":"2018-05-17 03:00:10",
+				"event_end_date_time":"2018-05-17 04:00:10",
+				"event_address1":"NYC rails 1234",
+				"event_address_2":"New York city , United States",
+				"event_org_id":"1",
+				"event_created_dtm":"2018-05-17 05:55:02",
+				"tickets":[
+					{
+						"ticket_id":"1",
+						"ticket_type":"type 1",
+						"ticket_price":"12.5",
+						"ticket_event_id":"1",
+						"ticket_created_dtm":"2018-05-17 07:59:34"
+					},
+					{
+						"ticket_id":"2",
+						"ticket_type":"type 2",
+						"ticket_price":"13",
+						"ticket_event_id":"1",
+						"ticket_created_dtm":"2018-05-17 07:59:34"
+					}
+				]
+			},
+			{...}
+		]
