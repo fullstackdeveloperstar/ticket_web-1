@@ -64,6 +64,8 @@ class Apiuser extends Apibase
 
                 $return_data['success'] = true;
                 $return_data['msg'] = "Update success!"; 
+                $this->reloaduser();
+                $return_data['user'] = $this->user;
                 echo json_encode($return_data);
                 exit();
             }

@@ -113,14 +113,24 @@ class User_model extends CI_Model
      */
     function getUserInfo($userId)
     {
-        $this->db->select('userId, name, email, mobile, roleId');
-        $this->db->from('tbl_users');
-        $this->db->where('isDeleted', 0);
-		$this->db->where('roleId !=', 1);
-        $this->db->where('userId', $userId);
+        // $this->db->select('userId, name, email, mobile, roleId, password, user_token,fname, lname,');
+  //       $this->db->from('tbl_users');
+  //       $this->db->where('isDeleted', 0);
+		// $this->db->where('roleId !=', 1);
+  //       $this->db->where('userId', $userId);
+  //       $query = $this->db->get();
+        
+  //       return $query->result();
+
+        $this->db->select('BaseTbl.userId, BaseTbl.password, BaseTbl.email, BaseTbl.name, BaseTbl.roleId, Roles.role, BaseTbl.user_token, BaseTbl.fname, BaseTbl.lname, BaseTbl.profile_image, BaseTbl.createdDtm');
+        $this->db->from('tbl_users as BaseTbl');
+        $this->db->join('tbl_roles as Roles','Roles.roleId = BaseTbl.roleId');
+        $this->db->where('BaseTbl.userId', $userId);
+        $this->db->where('BaseTbl.isDeleted', 0);
         $query = $this->db->get();
         
-        return $query->result();
+        $user = $query->result();
+        return $user;
     }
     
     

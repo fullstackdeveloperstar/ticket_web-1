@@ -21,4 +21,9 @@ class Apibase extends CI_Controller
             exit();
         } 
     }
+
+    public function reloaduser()
+    {
+        $this->user = $this->user_model->getUserInfo($this->user['userId']);
+    }
 }

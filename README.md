@@ -105,9 +105,24 @@ update
 	-request
 		fname, lname, email, profile_image
 	-response
-		{
-			"success":true,
-			"msg":"Upload success!"
+		{  
+		   "success":true,
+		   "msg":"Update success!",
+		   "user":[  
+		      {  
+		         "userId":"4",
+		         "password":"$2y$10$i7GqXkpNOuOe2DlmuhHY0uqvAem.s\/1NqVocNgCAmR1pP4ClYwRTW",
+		         "email":"test@mail.com",
+		         "name":null,
+		         "roleId":"3",
+		         "role":"Employee",
+		         "user_token":"5afba6d5109e0",
+		         "fname":"Test",
+		         "lname":"Test",
+		         "profile_image":"http:\/\/localhost\/assets\/uploads\/user_profile\/323b0e58c3ee3e2f62aa456a868bcd76.jpg",
+		         "createdDtm":"2018-05-16 05:34:45"
+		      }
+		   ]
 		}
 		or
 		{
