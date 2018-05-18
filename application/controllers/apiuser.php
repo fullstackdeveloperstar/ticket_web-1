@@ -144,5 +144,4 @@ class Apiuser extends Apibase
         $data['success'] = true;
         echo json_encode($data);
     }
-
 }

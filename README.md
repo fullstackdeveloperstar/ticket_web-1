@@ -253,25 +253,8 @@ liked events list
 		token
 	-response
 		{  
-		   "liked_events":[  
-		      {  
-		         "event_id":"1",
-		         "event_title":"test Event Title",
-		         "event_description":"Our currency rankings show that the most popular Euro exchange rate is the USD to EUR rate. The currency code for Euros is EUR, and the currency symbol is \u20ac.",
-		         "event_image":"http:\/\/192.168.0.62\/assets\/uploads\/event_image\/test.png",
-		         "event_start_date_time":"2018-05-17 03:00:10",
-		         "event_end_date_time":"2018-05-17 04:00:10",
-		         "event_address1":"NYC rails 1234",
-		         "event_address_2":"New York city , United States",
-		         "event_lat":"0",
-		         "event_long":"0",
-		         "event_org_id":"1",
-		         "event_created_dtm":"2018-05-17 19:00:08",
-		         "evl_id":"1",
-		         "evl_event_id":"1",
-		         "evl_user_id":"4",
-		         "evl_created_dtm":"2018-05-17 19:17:42"
-		      },
+		   "success":true,
+		   "events":[  
 		      {  
 		         "event_id":"2",
 		         "event_title":"test Event Title",
@@ -281,15 +264,34 @@ liked events list
 		         "event_end_date_time":"2018-05-17 04:00:10",
 		         "event_address1":"NYC rails 1234",
 		         "event_address_2":"New York city , United States",
-		         "event_lat":"0",
-		         "event_long":"0",
+		         "event_lat":"17.845098",
+		         "event_long":"-29.330223",
 		         "event_org_id":"2",
-		         "event_created_dtm":"2018-05-17 19:00:54",
+		         "event_created_dtm":"2018-05-17 20:37:24",
 		         "evl_id":"2",
 		         "evl_event_id":"2",
 		         "evl_user_id":"4",
-		         "evl_created_dtm":"2018-05-17 19:41:45"
+		         "evl_created_dtm":"2018-05-17 19:41:45",
+		         "tickets":[  
+		            {  
+		               "ticket_id":"2",
+		               "ticket_type":"type 2",
+		               "ticket_price":"13",
+		               "ticket_counts":"8",
+		               "ticket_sold_counts":"5",
+		               "ticket_event_id":"2",
+		               "ticket_created_dtm":"2018-05-17 14:53:18"
+		            }
+		         ],
+		         "org":{  
+		            "org_id":"2",
+		            "org_email":"tesorg2@mail.com",
+		            "org_name":"Org 2",
+		            "org_image":"http:\/\/192.168.0.62\/assets\/uploads\/org_image\/test.png",
+		            "org_description":"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+		            "org_created_dtm":"2018-05-17 19:01:23"
+		         }
 		      }
-		   ],
-		   "success":true
+		   ]
 		}
+

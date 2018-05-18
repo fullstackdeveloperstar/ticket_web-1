@@ -30,15 +30,21 @@ class Apievent extends Apibase
             $events[$key]['is_liked'] = $isliked;
        }
        echo json_encode($events);
-       // $data['success'] = true;
-       // $data['events'] = $events;
-       // echo json_encode($data);
+
     }
 
     public function getLikedEventsList()
     {
-        $data['liked_events'] = $this->event_model->getLikedEvents($this->user['userId']);
+        $events = $this->event_model->getLikedEvents($this->user['userId']);
+         foreach ($events as $key => $event) 
+         {
+              $tickets = $this->ticket_model->getTickets($event["event_id"]);
+              $org = $this->org_model->getOrg($event["event_org_id"]);
+              $events[$key]['tickets'] = $tickets;
+              $events[$key]['org'] = $org;
+         }
         $data['success'] = true;
+        $data['events'] = $events;
 
         echo json_encode($data);
     }
