@@ -13,7 +13,6 @@ class Apiuser extends Apibase
         $this->load->model('event_like_model');
         $this->load->model('ticket_puchase_model');
     }
-
     public function index()
     {
        echo json_encode($this->user);
@@ -50,7 +49,7 @@ class Apiuser extends Apibase
             {
                 $error = array('error' => $this->upload->display_errors());
                 $data['success'] = false;
-                $data['msg'] = "Upload failure!";
+                $data['msg'] = $error;
                 echo json_encode($data);
                 exit();
             }

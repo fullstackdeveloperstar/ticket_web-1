@@ -47,6 +47,7 @@ $route['api/user/countticketsandliked'] = 'apiuser/getTicketsAndLikedEventsCount
 // event apis
 $route['api/event/getall'] = "apievent/index";
 $route['api/event/liked'] = "apievent/getLikedEventsList";
+$route['api/event/toggle_like'] = "apievent/toggleLike";
 
 
 $route['api/isloggedin'] = "apilogin/isLoggedIn";

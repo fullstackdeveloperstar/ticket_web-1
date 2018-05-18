@@ -39,11 +39,13 @@ signup
 			"msg":"Signup is successed",
 			"user":
 				{
+					"userId" :4,
 					"email":"tttta@mail.coma",
 					"password":"$2y$10$YTQNFWdEkBirxc6RfC96YuqI2RnZd7wmuDfROcDR0YRgn3f\/A3OCK",
 					"roleId":3,
 					"fname":"Tttt",
 					"lname":"Ttttt",
+					"role":"Employee",
 					"createdBy":-1,
 					"createdDtm":"2018-05-17 18:41:45",
 					"user_token":"5afdb0c946577",
@@ -290,8 +292,25 @@ liked events list
 		            "org_image":"http:\/\/192.168.0.62\/assets\/uploads\/org_image\/test.png",
 		            "org_description":"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
 		            "org_created_dtm":"2018-05-17 19:01:23"
-		         }
+		         },
+		         "is_liked" : true
 		      }
 		   ]
 		}
 
+toggle like
+	
+	-post http://localhost/api/event/toggle_like
+	-header
+		token
+	-request
+		event_id
+	-response
+		{
+			"success":true,
+			"msg":"unliked"
+		}
+		{
+			"success":true,
+			"msg":"liked"
+		}

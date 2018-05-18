@@ -27,4 +27,22 @@ class Event_like_model extends CI_Model
 
         return true;
     }
+
+    public function deleteLike($userId, $event_id)
+    {
+        $this->db->where('evl_user_id', $userId);
+        $this->db->where('evl_event_id', $event_id);
+        $this->db->delete($this->table_name);
+    }
+
+    public function addLike($userId, $event_id)
+    {
+        $data = array(
+            'evl_user_id' => $userId,
+            'evl_event_id' => $event_id
+        );
+
+        $this->db->insert($this->table_name, $data);
+    }
+
 }

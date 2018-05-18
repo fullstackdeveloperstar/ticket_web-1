@@ -113,6 +113,8 @@ class Apilogin extends CI_Controller
             
             if($result > 0)
             {
+                $userInfo['userId'] = $result;
+                $userInfo['role'] = "Employee";
                 $data['success'] = true;
                 $data['msg'] = "Signup is successed";
                 $data['user'] = $userInfo;
@@ -173,13 +175,9 @@ class Apilogin extends CI_Controller
                         $data1["message"] = "Reset Your Password";
                     }
 
-                    // $sendStatus = resetPasswordEmail($data1);
-
                     $sendStatus = $this->email_model->sendEmail($userInfo[0]->email, "Forgot Password",  $data1['reset_link']);                    
-
                     if($sendStatus){
-                        // $status = "send";
-                        // setFlashData($status, "Reset password link sent successfully, please check mails.");
+
                         $data['success'] = true;
                         $data['msg'] = "Email is sent";
                         echo json_encode($data);
@@ -193,8 +191,6 @@ class Apilogin extends CI_Controller
                 }
                 else
                 {
-                    // $status = 'unable';
-                    // setFlashData($status, "It seems an error while sending your details, try again.");
                     $data['success'] = false;
                     $data['msg'] = "It seems an error while sending your details, try again.";
                     echo json_encode($data);
@@ -203,33 +199,11 @@ class Apilogin extends CI_Controller
             }
             else
             {
-                // $status = 'invalid';
-                // setFlashData($status, "This email is not registered with us.");
                 $data['success'] = false;
                 $data['msg'] = "This email is not registered with us.";
                 echo json_encode($data);
                 exit();
             }
-           
         }
     }
-
-  //   public function isLoggedIn(){
-  //   	$isLoggedIn = $this->session->userdata ( 'isLoggedIn' );
-		
-		// if (! isset ( $isLoggedIn ) || $isLoggedIn != TRUE) {
-		// 	$data['success'] = false;
-		// 	echo json_encode($data);
-		// } else {
-		// 	$data['success'] = true;
-		// 	echo json_encode($data);
-		// }
-  //   }
-
-    // public function sendEmail()
-    // {
-    //    $this->email_model->sendEmail();
-
-    // }
-
 }

@@ -42,10 +42,45 @@ class Apievent extends Apibase
               $org = $this->org_model->getOrg($event["event_org_id"]);
               $events[$key]['tickets'] = $tickets;
               $events[$key]['org'] = $org;
+              $events[$key]['is_liked'] = true;
          }
         $data['success'] = true;
         $data['events'] = $events;
 
         echo json_encode($data);
+    }
+
+    public function toggleLike()
+    {
+        $this->form_validation->set_rules('event_id','Event Id','required|numeric');
+
+        if($this->form_validation->run() == FALSE)
+        {
+          $data['success'] = false;
+          $data['msg'] = "Please send Event Id";
+          echo json_encode($data);
+          exit();
+        }
+        else
+        {
+          $event_id = $this->input->post('event_id');
+          $is_liked = $this->event_like_model->isLiked($this->user['userId'],$event_id);
+          // echo json_encode(array('isliked'=>$is_liked));
+          if($is_liked)
+          {
+            $this->event_like_model->deleteLike($this->user['userId'],$event_id);
+            $data['success'] = true;
+            $data['msg'] = "unliked";
+            echo json_encode($data);
+            exit();
+          }
+          else {
+            $this->event_like_model->addLike($this->user['userId'],$event_id);
+            $data['success'] = true;
+            $data['msg'] = "liked";
+            echo json_encode($data);
+            exit();
+          }
+        }
     }
 }
