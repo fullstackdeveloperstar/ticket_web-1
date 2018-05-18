@@ -36,7 +36,6 @@ class Apiuser extends Apibase
         {
             $config['upload_path']          = "assets/uploads/user_profile";
             $config['allowed_types']        = 'gif|jpg|png';
-            // $config['overwrite']            = TRUE;
             $config['max_size']             = 2048000; // Can be set to particular file size , here it is 2 MB(2048 Kb)
             $config['max_height']           = 7680;
             $config['max_width']            = 10240;
@@ -95,6 +94,41 @@ class Apiuser extends Apibase
             echo json_encode($return_data);
             exit();
        
+        }
+    }
+
+    public function uploadUserProfile()
+    {
+        $config['upload_path']          = "assets/uploads/user_profile";
+        $config['allowed_types']        = 'gif|jpg|png';
+        $config['max_size']             = 2048000; 
+        $config['max_height']           = 7680;
+        $config['max_width']            = 10240;
+        $config['encrypt_name']         = TRUE;
+        $config['remove_spaces']        = TRUE;
+
+        $this->load->library('upload', $config);
+
+        if ( ! $this->upload->do_upload('profile_image'))
+        {
+            $error = array('error' => $this->upload->display_errors());
+            $data['success'] = false;
+            $data['msg'] = $error;
+            echo json_encode($data);
+            exit();
+        }
+        else
+        {
+            $uploaddata =  $this->upload->data();
+         
+            $data['profile_image'] = base_url()."assets/uploads/user_profile/".$uploaddata['file_name'];
+
+            $this->user_model->editUser($data, $this->user['userId']);
+
+            $return_data['success'] = true;
+            $return_data['msg'] = "Upload success!"; 
+            echo json_encode($return_data);
+            exit();
         }
     }
 

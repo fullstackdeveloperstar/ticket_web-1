@@ -41,6 +41,7 @@ $route['api/forgotpassword'] = 'apilogin/forgotpassword';
 $route['api/user/myinfo'] = "apiuser/index";
 $route['api/user/update'] = "apiuser/update";
 $route['api/user/update1'] = "apiuser/update1";
+$route['api/user/uploadprofileimage'] = "apiuser/uploadUserProfile";
 $route['api/user/changepassword'] = 'apiuser/updatePassword';
 $route['api/user/countticketsandliked'] = 'apiuser/getTicketsAndLikedEventsCount';
 

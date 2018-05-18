@@ -30,7 +30,6 @@ class Apievent extends Apibase
             $events[$key]['is_liked'] = $isliked;
        }
        echo json_encode($events);
-
     }
 
     public function getLikedEventsList()

@@ -137,6 +137,19 @@ update1
 			"success":false,
 			"msg":"All data is required!"
 		}
+
+upload profile image
+	
+	-post http://localhost/api/user/uploadprofileimage
+	-header
+		token
+	-request
+		profile_image
+	-response
+		{
+			"success":true,
+			"msg":"Upload success!"
+		}
 		
 
 change password
