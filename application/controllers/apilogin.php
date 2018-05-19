@@ -115,6 +115,7 @@ class Apilogin extends CI_Controller
             {
                 $userInfo['userId'] = $result;
                 $userInfo['role'] = "Employee";
+                $userInfo['profile_image'] = "";
                 $data['success'] = true;
                 $data['msg'] = "Signup is successed";
                 $data['user'] = $userInfo;
