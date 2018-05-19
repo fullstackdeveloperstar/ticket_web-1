@@ -24,6 +24,6 @@ class Apibase extends CI_Controller
 
     public function reloaduser()
     {
-        $this->user = $this->user_model->getUserInfo($this->user['userId']);
+        $this->user = $this->user_model->getUserInfo($this->user['userId'])[0];
     }
 }
