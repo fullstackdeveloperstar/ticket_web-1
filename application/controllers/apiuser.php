@@ -48,7 +48,7 @@ class Apiuser extends Apibase
             {
                 $error = array('error' => $this->upload->display_errors());
                 $data['success'] = false;
-                $data['msg'] = $error;
+                $data['msg'] = "upload error!";
                 echo json_encode($data);
                 exit();
             }
@@ -115,7 +115,7 @@ class Apiuser extends Apibase
         {
             $error = array('error' => $this->upload->display_errors());
             $data['success'] = false;
-            $data['msg'] = $error;
+            $data['msg'] = "Upload Error!";
             echo json_encode($data);
             exit();
         }
