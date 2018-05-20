@@ -13,4 +13,12 @@ class Ticket_model extends CI_Model
 
     	return $result;
     }
+
+    public function addTicket($data)
+    {
+    	$this->db->insert($this->table_name, $data);
+        
+        $insert_id = $this->db->insert_id();
+        return $insert_id;
+    }
 }

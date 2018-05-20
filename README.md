@@ -402,3 +402,17 @@ create org
 		}
 
 
+Ticket apis
+
+create ticket
+
+	-post http://localhost/api/ticket/create
+	-header 
+		token
+	-request
+		ticket_type, ticket_price, ticket_counts, ticket_event_id
+	-response
+		{
+			"success":true,
+			"msg":"Ticket is created successfully"
+		}

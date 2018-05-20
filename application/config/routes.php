@@ -54,6 +54,9 @@ $route['api/event/create'] = "apievent/createEvent";
 // org apis
 $route['api/org/create'] = "apiorg/createOrg";
 
+// ticket apis
+$route['api/ticket/create'] = "apiticket/createTicket";
+
 
 $route['api/isloggedin'] = "apilogin/isLoggedIn";
 $route['api'] = 'Apiuser/index';
