@@ -106,7 +106,7 @@ class Apilogin extends CI_Controller
                 exit();
             }
 
-            $userInfo = array('email'=>$email, 'password'=>getHashedPassword($password), 'roleId'=>3, 'fname'=>$fname, 'lname' => $lname, 'createdBy'=> -1, 'createdDtm'=>date('Y-m-d H:i:s'), 'user_token' => uniqid(), 'device_token'=> $device_token);
+            $userInfo = array('email'=>$email, 'password'=>getHashedPassword($password), 'roleId'=>3, 'fname'=>$fname, 'lname' => $lname,'user_org_id'=>0, 'createdBy'=> -1, 'createdDtm'=>date('Y-m-d H:i:s'), 'user_token' => uniqid(), 'device_token'=> $device_token);
             
 
             $result = $this->user_model->addNewUser($userInfo);
