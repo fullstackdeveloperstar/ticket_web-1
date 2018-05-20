@@ -13,6 +13,11 @@ class Apibase extends CI_Controller
         $headers = $this->input->request_headers();
 
         // echo $headers['Token'];
+        if(!isset($headers['Token']))
+        {
+            echo json_encode(array('success' => false, "msg" => "token is required!"));
+            exit();
+        }
 
         $this->user = $this->user_model->getUserByToken($headers['Token']);
         // var_dump($user);

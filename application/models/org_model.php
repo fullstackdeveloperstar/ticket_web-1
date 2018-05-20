@@ -17,4 +17,12 @@ class Org_model extends CI_Model
 
     	return null;
     }
+
+    public function createOrg($data)
+    {
+        $this->db->insert($this->table_name, $data);
+        
+        $insert_id = $this->db->insert_id();
+        return $insert_id;
+    }
 }

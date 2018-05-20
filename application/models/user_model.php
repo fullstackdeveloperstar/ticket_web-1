@@ -122,7 +122,7 @@ class User_model extends CI_Model
         
   //       return $query->result();
 
-        $this->db->select('BaseTbl.userId, BaseTbl.password, BaseTbl.email, BaseTbl.name, BaseTbl.roleId, Roles.role, BaseTbl.user_token, BaseTbl.fname, BaseTbl.lname, BaseTbl.profile_image, BaseTbl.createdDtm');
+        $this->db->select('BaseTbl.userId, BaseTbl.password, BaseTbl.email, BaseTbl.name, BaseTbl.roleId, Roles.role, BaseTbl.user_token, BaseTbl.fname, BaseTbl.lname,BaseTbl.user_org_id, BaseTbl.profile_image, BaseTbl.createdDtm');
         $this->db->from('tbl_users as BaseTbl');
         $this->db->join('tbl_roles as Roles','Roles.roleId = BaseTbl.roleId');
         $this->db->where('BaseTbl.userId', $userId);

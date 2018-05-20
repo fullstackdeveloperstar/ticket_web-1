@@ -344,3 +344,30 @@ toggle like
 			"success":true,
 			"msg":"liked"
 		}
+
+org apis
+
+create org
+
+	-post http://localhost/api/org/create
+	-header
+		token
+	-request 
+		org_email, org_name, org_description, org_image
+	-response
+		{
+			"success":false,
+			"msg":"Organizer is already exist"
+		}
+		{  
+		   "success":true,
+		   "msg":"Organizer is created successfully!",
+		   "org":{  
+		      "org_id":"12",
+		      "org_email":"test@mail.com",
+		      "org_name":"test",
+		      "org_image":"http:\/\/localhost\/assets\/uploads\/org_image\/d5ca862c9b1a19186357cb4843eb4786.jpg",
+		      "org_description":"test",
+		      "org_created_dtm":"2018-05-20 02:39:42"
+		   }
+		}

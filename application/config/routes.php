@@ -50,6 +50,9 @@ $route['api/event/getall'] = "apievent/index";
 $route['api/event/liked'] = "apievent/getLikedEventsList";
 $route['api/event/toggle_like'] = "apievent/toggleLike";
 
+// org apis
+$route['api/org/create'] = "apiorg/createOrg";
+
 
 $route['api/isloggedin'] = "apilogin/isLoggedIn";
 $route['api'] = 'Apiuser/index';

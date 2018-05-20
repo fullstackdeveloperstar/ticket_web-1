@@ -36,7 +36,7 @@ class Apiuser extends Apibase
         {
             $config['upload_path']          = "assets/uploads/user_profile";
             $config['allowed_types']        = 'gif|jpg|png';
-            $config['max_size']             = 2048000; // Can be set to particular file size , here it is 2 MB(2048 Kb)
+            $config['max_size']             = 2048000; 
             $config['max_height']           = 7680;
             $config['max_width']            = 10240;
             $config['encrypt_name']         = TRUE;
