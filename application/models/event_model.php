@@ -21,4 +21,24 @@ class Event_model extends CI_Model
     	$query = $this->db->get();
     	return $query->result_array();
     }
+
+    public function creatEvent($data)
+    {
+        $this->db->insert($this->table_name, $data);
+        
+        $insert_id = $this->db->insert_id();
+        return $insert_id;
+    }
+
+    public function getEvent($event_id)
+    {
+        $this->db->where('event_id', $event_id);
+        $query = $this->db->get($this->table_name);
+
+        $result = $query->result_array();
+        if(count($result)>0){
+            return $result[0];
+        }
+        return false;
+    }
 }

@@ -199,6 +199,8 @@ tickets and liked event counts
 			"success":true
 		}
 
+Event Apis
+
 event list
 	
 	-get http://159.203.99.60/api/event/getall
@@ -345,6 +347,33 @@ toggle like
 			"msg":"liked"
 		}
 
+creat event
+	
+	-post http://localhost/api/event/create
+	-header
+		token
+	-request
+		event_title, event_desscription, event_start_date_time, event_end_date_time,event_address1, event_address2, event_lat, event_lang, event_image
+	-response
+		{  
+		   "success":true,
+		   "msg":"Event is created successfully!",
+		   "event":{  
+		      "event_id":"5",
+		      "event_title":"afasd",
+		      "event_description":"asdf",
+		      "event_image":"http:\/\/localhost\/assets\/uploads\/event_image\/7dd67f9a88d5c925092943b5af599beb.jpg",
+		      "event_start_date_time":"2018-5-3",
+		      "event_end_date_time":"2018-5-3",
+		      "event_address1":"asdf",
+		      "event_address_2":"asdf",
+		      "event_lat":"2134",
+		      "event_long":"2234",
+		      "event_org_id":"12",
+		      "event_created_dtm":"2018-05-20 04:18:30"
+		   }
+		}
+
 org apis
 
 create org
@@ -371,3 +400,5 @@ create org
 		      "org_created_dtm":"2018-05-20 02:39:42"
 		   }
 		}
+
+

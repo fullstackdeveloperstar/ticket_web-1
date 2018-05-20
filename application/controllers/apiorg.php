@@ -19,12 +19,12 @@ class Apiorg extends Apibase
     public function createOrg()
     {
         $org_id = $this->user['user_org_id'];
-        // if($org_id != "0"){
-        //     $data['success'] = false;
-        //     $data['msg'] = "Organizer is already exist";
-        //     echo json_encode($data);
-        //     exit();
-        // }
+        if($org_id != "0"){
+            $data['success'] = false;
+            $data['msg'] = "Organizer is already exist";
+            echo json_encode($data);
+            exit();
+        }
 
         $this->form_validation->set_rules('org_name','Org Name','trim|required|max_length[128]|xss_clean');
         $this->form_validation->set_rules('org_description','Org description','trim|required|max_length[2048]|xss_clean');
