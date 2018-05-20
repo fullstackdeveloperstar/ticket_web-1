@@ -16,7 +16,7 @@ login
 				"user_token":"5afba6d5109e0",
 				"fname": "rubby",
 				"lname": "star",
-				"user_org_id": 0,
+				"user_org_id": "0",
 				"email": "rubby.star@hotmail.com",
 				"profile_image":"http:\/\/localhost\/assets\/uploads\/user_profile\/FA-A39450-2.jpg",
 				"createdDtm":"2018-05-16 05:34:45"
@@ -48,7 +48,7 @@ signup
 					"lname":"Ttttt",
 					"role":"Employee",
 					"createdBy":-1,
-					"user_org_id":0,
+					"user_org_id":"0",
 					"createdDtm":"2018-05-17 18:41:45",
 					"user_token":"5afdb0c946577",
 					"device_token":"aaaa"
