@@ -11,6 +11,7 @@ class Apilogin extends CI_Controller
         $this->load->model('login_model');
         $this->load->model('user_model');
         $this->load->model('email_model');
+        $this->load->model('org_model');
     }
 
     public function index()
@@ -56,9 +57,17 @@ class Apilogin extends CI_Controller
 
                                     
                     $this->session->set_userdata($sessionArray);
-                    
+
+                    if($res->user_org_id != "0")
+                    {
+                        $org = $this->org_model->getOrg($res->user_org_id);
+                    } else{
+                        $org = null;
+                    }
+                    $res->org= $org;
                     $data['success'] = true;
 		        	$data['user'] = $res;
+
 		            echo json_encode($data);
 		            exit();
                 }
