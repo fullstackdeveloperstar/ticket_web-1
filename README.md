@@ -477,3 +477,16 @@ create ticket
 			"success":true,
 			"msg":"Ticket is created successfully"
 		}
+
+update ticket
+	
+	-post http://localhost/api/ticket/update
+	-header
+		token
+	-request
+		ticket_type, ticket_price, ticket_counts, ticket_id
+	-response
+		{  
+		   "success":true,
+		   "msg":"Ticket is updated successfully"
+		}

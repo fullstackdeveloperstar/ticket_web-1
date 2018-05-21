@@ -44,4 +44,32 @@ class Apiticket extends Apibase
             exit();
         }
     }
+
+    public function updateTicket()
+    {
+        $this->form_validation->set_rules('ticket_type','Ticket Type','required');
+        $this->form_validation->set_rules('ticket_price','Ticket Price','required');
+        $this->form_validation->set_rules('ticket_counts','Ticket Counts','required|numeric');
+        $this->form_validation->set_rules('ticket_id','Ticket Id','required|numeric');
+        if($this->form_validation->run() == FALSE)
+        {
+            $data['success'] = false;
+            $data['msg'] = "All data is required!!!";
+            echo json_encode($data);
+            exit();
+        }
+        else
+        {
+            $data['ticket_type'] = $this->input->post('ticket_type');
+            $data['ticket_price'] = $this->input->post('ticket_price');
+            $data['ticket_counts'] = $this->input->post('ticket_counts');
+            $ticket_id = $this->input->post('ticket_id');
+            $this->ticket_model->editTicket($ticket_id, $data);
+
+            $return_data['success'] = true;
+            $return_data['msg'] = "Ticket is updated successfully";
+            echo json_encode($return_data);
+            exit();
+        }
+    }
 }

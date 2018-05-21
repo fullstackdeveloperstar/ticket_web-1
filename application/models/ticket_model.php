@@ -21,4 +21,10 @@ class Ticket_model extends CI_Model
         $insert_id = $this->db->insert_id();
         return $insert_id;
     }
+
+    public function editTicket($ticket_id, $data)
+    {
+        $this->db->where('ticket_id', $ticket_id);
+        $this->db->update($this->table_name, $data);
+    }
 }

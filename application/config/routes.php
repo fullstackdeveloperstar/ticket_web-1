@@ -57,6 +57,7 @@ $route['api/org/update'] = "apiorg/updateOrg";
 
 // ticket apis
 $route['api/ticket/create'] = "apiticket/createTicket";
+$route['api/ticket/update'] = "apiticket/updateTicket";
 
 
 $route['api/isloggedin'] = "apilogin/isLoggedIn";
