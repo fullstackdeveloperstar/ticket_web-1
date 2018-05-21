@@ -53,6 +53,7 @@ $route['api/event/create'] = "apievent/createEvent";
 
 // org apis
 $route['api/org/create'] = "apiorg/createOrg";
+$route['api/org/update'] = "apiorg/updateOrg";
 
 // ticket apis
 $route['api/ticket/create'] = "apiticket/createTicket";

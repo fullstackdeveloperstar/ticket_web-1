@@ -9,6 +9,7 @@ class Apibase extends CI_Controller
     {
         parent::__construct();
         $this->load->model('user_model');
+        $this->load->model('org_model');
 
         $headers = $this->input->request_headers();
 
@@ -30,5 +31,6 @@ class Apibase extends CI_Controller
     public function reloaduser()
     {
         $this->user = $this->user_model->getUserInfo($this->user['userId'])[0];
+        $this->user->org = $this->org_model->getOrg($this->user->user_org_id);
     }
 }

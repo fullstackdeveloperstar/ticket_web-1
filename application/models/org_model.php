@@ -25,4 +25,12 @@ class Org_model extends CI_Model
         $insert_id = $this->db->insert_id();
         return $insert_id;
     }
+
+    public function updateOrg($orgId, $data)
+    {
+        $this->db->where('org_id', $orgId);
+        $this->db->update($this->table_name, $data);
+        
+        return TRUE;
+    }
 }

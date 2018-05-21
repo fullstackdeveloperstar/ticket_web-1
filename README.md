@@ -427,6 +427,41 @@ create org
 		   }
 		}
 
+update org
+
+	-post http://localhost/api/org/update
+	-header
+		token
+	-request
+		org_email, org_name, org_description, org_image
+	-response
+		{  
+		   "success":true,
+		   "msg":"Organizer is updated successfully!",
+		   "user":{  
+		      "userId":"1",
+		      "password":"$2y$10$t7sVZgFTt0aRlGgXg89Xn.S702Q33HNt932bsRJRue.h.EYmvDMlW",
+		      "email":"admin@codeinsect.com",
+		      "name":"System Administrator",
+		      "roleId":"1",
+		      "role":"System Administrator",
+		      "user_token":"5afba3fcaa9a9",
+		      "fname":"admin",
+		      "lname":"test",
+		      "user_org_id":"19",
+		      "profile_image":"",
+		      "createdDtm":"2015-07-01 18:56:49",
+		      "org":{  
+		         "org_id":"19",
+		         "org_email":"test@mail.com",
+		         "org_name":"test",
+		         "org_image":"http:\/\/localhost\/assets\/uploads\/org_image\/e1467681b22ac9c14bc209cb0591f6d2.jpg",
+		         "org_description":"test",
+		         "org_created_dtm":"2018-05-21 01:23:58"
+		      }
+		   }
+		}
+
 
 Ticket apis
 
