@@ -398,13 +398,32 @@ create org
 		{  
 		   "success":true,
 		   "msg":"Organizer is created successfully!",
-		   "org":{  
-		      "org_id":"12",
-		      "org_email":"test@mail.com",
-		      "org_name":"test",
-		      "org_image":"http:\/\/localhost\/assets\/uploads\/org_image\/d5ca862c9b1a19186357cb4843eb4786.jpg",
-		      "org_description":"test",
-		      "org_created_dtm":"2018-05-20 02:39:42"
+		   "user":{  
+		      "userId":"1",
+		      "email":"admin@codeinsect.com",
+		      "password":"$2y$10$t7sVZgFTt0aRlGgXg89Xn.S702Q33HNt932bsRJRue.h.EYmvDMlW",
+		      "name":"System Administrator",
+		      "fname":"admin",
+		      "lname":"test",
+		      "mobile":"9890098900",
+		      "roleId":"1",
+		      "user_token":"5afba3fcaa9a9",
+		      "profile_image":"",
+		      "device_token":"123123",
+		      "user_org_id":14,
+		      "isDeleted":"0",
+		      "createdBy":"0",
+		      "createdDtm":"2015-07-01 18:56:49",
+		      "updatedBy":"1",
+		      "updatedDtm":"2018-05-16 03:57:02",
+		      "org":{  
+		         "org_id":"14",
+		         "org_email":"test@mail.com",
+		         "org_name":"test",
+		         "org_image":"http:\/\/localhost\/assets\/uploads\/org_image\/1589534bde4a9844146b3917b42c60d4.jpg",
+		         "org_description":"test",
+		         "org_created_dtm":"2018-05-21 00:19:47"
+		      }
 		   }
 		}
 

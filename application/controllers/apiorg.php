@@ -65,6 +65,7 @@ class Apiorg extends Apibase
                 $data['org_image'] = base_url()."assets/uploads/org_image/".$uploaddata['file_name'];
 
                 $org_id = $this->org_model->createOrg($data);
+                $this->user['user_org_id'] = $org_id;
 
                 $userdata['user_org_id'] = $org_id;
                 $this->user_model->editUser($userdata, $this->user['userId']);
@@ -72,8 +73,8 @@ class Apiorg extends Apibase
                 $return_data['success'] = true;
                 $return_data['msg'] = "Organizer is created successfully!"; 
                 // $this->reloaduser();
-                // $return_data['user'] = $this->user;
-                $return_data['org'] = $this->org_model->getOrg($org_id);
+                $return_data['user'] = $this->user;
+                $return_data['user']['org'] = $this->org_model->getOrg($org_id);
                 echo json_encode($return_data);
                 exit();
             }
