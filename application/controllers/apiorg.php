@@ -65,7 +65,7 @@ class Apiorg extends Apibase
                 $data['org_image'] = base_url()."assets/uploads/org_image/".$uploaddata['file_name'];
 
                 $org_id = $this->org_model->createOrg($data);
-                $this->user['user_org_id'] = $org_id;
+                $this->user['user_org_id'] = "".$org_id;
 
                 $userdata['user_org_id'] = $org_id;
                 $this->user_model->editUser($userdata, $this->user['userId']);
