@@ -381,6 +381,34 @@ creat event
 		   }
 		}
 
+update event
+
+	-post http://localhost/api/event/create
+	-header
+		token
+	-request
+		event_id,event_title, event_desscription, event_start_date_time, event_end_date_time,event_address1, event_address2, event_lat, event_lang, event_image
+	-response
+		{  
+		   "success":true,
+		   "msg":"Event is updated successfully!",
+		   "event":{  
+		      "event_id":"6",
+		      "event_title":"test event title",
+		      "event_description":"test description",
+		      "event_image":"http:\/\/localhost\/assets\/uploads\/event_image\/e8c6170cf92e16a2942ba592b017be12.jpg",
+		      "event_start_date_time":"2018-5-3",
+		      "event_end_date_time":"2018-5-3",
+		      "event_address1":"asdf",
+		      "event_address_2":"asdf",
+		      "event_lat":"2134",
+		      "event_long":"2234",
+		      "event_org_id":"12",
+		      "event_created_dtm":"2018-05-21 08:04:45"
+		   }
+		}
+	
+
 org apis
 
 create org

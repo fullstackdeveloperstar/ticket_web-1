@@ -102,10 +102,10 @@ class Apievent extends Apibase
         $this->form_validation->set_rules('event_long','Event long','required|max_length[128]|xss_clean');
         if($this->form_validation->run() == FALSE)
         {
-            $data['success'] = false;
-            $data['msg'] = "All data is required!!!";
-            echo json_encode($data);
-            exit();
+          $data['success'] = false;
+          $data['msg'] = "All data is required!!!";
+          echo json_encode($data);
+          exit();
         }
         else
         {
@@ -121,33 +121,97 @@ class Apievent extends Apibase
 
           if ( ! $this->upload->do_upload('event_image'))
           {
-              $error = array('error' => $this->upload->display_errors());
-              $data['success'] = false;
-              $data['msg'] = "upload error!";
-              echo json_encode($data);
-              exit();
+            $error = array('error' => $this->upload->display_errors());
+            $data['success'] = false;
+            $data['msg'] = "upload error!";
+            echo json_encode($data);
+            exit();
           }
           else
           {
-              $data['event_title'] = $this->input->post('event_title');
-              $data['event_description'] = $this->input->post('event_description');
-              $data['event_start_date_time'] = $this->input->post('event_start_date_time');
-              $data['event_end_date_time'] = $this->input->post('event_end_date_time');
-              $data['event_address1'] = $this->input->post('event_address1');
-              $data['event_address_2'] = $this->input->post('event_address2');
-              $data['event_lat'] = $this->input->post('event_lat');
-              $data['event_long'] = $this->input->post('event_long');
-              $uploaddata =  $this->upload->data();
-              $data['event_image'] = base_url()."assets/uploads/event_image/".$uploaddata['file_name'];
-              $data['event_org_id'] = $this->user['user_org_id'];
-              $event_id = $this->event_model->creatEvent($data);
+            $data['event_title'] = $this->input->post('event_title');
+            $data['event_description'] = $this->input->post('event_description');
+            $data['event_start_date_time'] = $this->input->post('event_start_date_time');
+            $data['event_end_date_time'] = $this->input->post('event_end_date_time');
+            $data['event_address1'] = $this->input->post('event_address1');
+            $data['event_address_2'] = $this->input->post('event_address2');
+            $data['event_lat'] = $this->input->post('event_lat');
+            $data['event_long'] = $this->input->post('event_long');
+            $uploaddata =  $this->upload->data();
+            $data['event_image'] = base_url()."assets/uploads/event_image/".$uploaddata['file_name'];
+            $data['event_org_id'] = $this->user['user_org_id'];
+            $event_id = $this->event_model->creatEvent($data);
 
-              $return_data['success'] = true;
-              $return_data['msg'] = "Event is created successfully!"; 
-              $return_data['event'] = $this->event_model->getEvent($event_id);
-              echo json_encode($return_data);
-              exit();
+            $return_data['success'] = true;
+            $return_data['msg'] = "Event is created successfully!"; 
+            $return_data['event'] = $this->event_model->getEvent($event_id);
+            echo json_encode($return_data);
+            exit();
           }
         }
+    }
+
+    public function updateEvent()
+    {
+      $this->form_validation->set_rules('event_id','Event Id','required');
+      $this->form_validation->set_rules('event_title','Event Title','required');
+      $this->form_validation->set_rules('event_description','Event description','required|max_length[2048]|xss_clean');
+      $this->form_validation->set_rules('event_start_date_time','Event Start Date','required|max_length[128]|xss_clean');
+      $this->form_validation->set_rules('event_end_date_time','Event Start Date','required|max_length[128]|xss_clean');
+      $this->form_validation->set_rules('event_address1','Event address 1','required|max_length[128]|xss_clean');
+      $this->form_validation->set_rules('event_address2','Event address 2','required|max_length[128]|xss_clean');
+      $this->form_validation->set_rules('event_lat','Event lat','required|max_length[128]|xss_clean');
+      $this->form_validation->set_rules('event_long','Event long','required|max_length[128]|xss_clean');
+      if($this->form_validation->run() == FALSE)
+      {
+        $data['success'] = false;
+        $data['msg'] = "All data is required!!!";
+        echo json_encode($data);
+        exit();
+      }
+      else
+      {
+        $config['upload_path']          = "assets/uploads/event_image";
+        $config['allowed_types']        = 'gif|jpg|png';
+        $config['max_size']             = 2048000; 
+        $config['max_height']           = 7680;
+        $config['max_width']            = 10240;
+        $config['encrypt_name']         = TRUE;
+        $config['remove_spaces']        = TRUE;
+
+        $this->load->library('upload', $config);
+
+        if ( ! $this->upload->do_upload('event_image'))
+        {
+          $error = array('error' => $this->upload->display_errors());
+          $data['success'] = false;
+          $data['msg'] = "upload error!";
+          echo json_encode($data);
+          exit();
+        }
+        else
+        {
+          $data['event_title'] = $this->input->post('event_title');
+          $data['event_description'] = $this->input->post('event_description');
+          $data['event_start_date_time'] = $this->input->post('event_start_date_time');
+          $data['event_end_date_time'] = $this->input->post('event_end_date_time');
+          $data['event_address1'] = $this->input->post('event_address1');
+          $data['event_address_2'] = $this->input->post('event_address2');
+          $data['event_lat'] = $this->input->post('event_lat');
+          $data['event_long'] = $this->input->post('event_long');
+          $uploaddata =  $this->upload->data();
+          $data['event_image'] = base_url()."assets/uploads/event_image/".$uploaddata['file_name'];
+          
+          
+          $event_id = $this->input->post('event_id');
+          $this->event_model->updateEvent($event_id, $data);
+
+          $return_data['success'] = true;
+          $return_data['msg'] = "Event is updated successfully!"; 
+          $return_data['event'] = $this->event_model->getEvent($event_id);
+          echo json_encode($return_data);
+          exit();
+        }
+      }
     }
 }

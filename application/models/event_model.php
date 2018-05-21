@@ -41,4 +41,10 @@ class Event_model extends CI_Model
         }
         return false;
     }
+
+    public function updateEvent($event_id, $data)
+    {
+        $this->db->where('event_id', $event_id);
+        $this->db->update($this->table_name, $data);
+    }
 }
