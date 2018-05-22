@@ -60,6 +60,14 @@ $route['api/ticket/create'] = "apiticket/createTicket";
 $route['api/ticket/update'] = "apiticket/updateTicket";
 
 
+
+// stripe
+$route['stripe_test/index'] = "stripe/index";
+$route['stripe_test/check'] = "stripe/check";
+$route['stripe_test/payment_success'] = 'stripe/payment_success';
+$route['stripe_test/payment_error'] = 'stripe/payment_error';
+$route['stripe_test/help'] = 'stripe/help';
+
 $route['api/isloggedin'] = "apilogin/isLoggedIn";
 $route['api'] = 'Apiuser/index';
 // $route['sendmail'] = "apilogin/sendEmail";
