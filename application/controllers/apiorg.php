@@ -140,4 +140,41 @@ class Apiorg extends Apibase
         }
     }
 
+    public function updateOrg1()
+    {
+        if ($this->user['user_org_id'] == "0")
+        {
+            $return_data['success'] = false;
+            $return_data['msg'] = "Organizer is not created yet!"; 
+            echo json_encode($return_data);
+            exit();
+        }
+        $this->form_validation->set_rules('org_name','Org Name','trim|required|max_length[128]|xss_clean');
+        $this->form_validation->set_rules('org_description','Org description','trim|required|max_length[2048]|xss_clean');
+        $this->form_validation->set_rules('org_email','Email','trim|required|valid_email|xss_clean|max_length[128]');
+        if($this->form_validation->run() == FALSE)
+        {
+            $data['success'] = false;
+            $data['msg'] = "All data is required!";
+            echo json_encode($data);
+            exit();
+        }
+        else
+        {      
+            $data['org_description'] = $this->input->post('org_description');
+            $data['org_name'] = $this->input->post('org_name');
+            $data['org_email'] = $this->input->post('org_email');
+            
+            $this->org_model->updateOrg($this->user['user_org_id'], $data);
+            
+            $return_data['success'] = true;
+            $return_data['msg'] = "Organizer is updated successfully!"; 
+            $this->reloaduser();
+            $return_data['user'] = $this->user;
+            echo json_encode($return_data);
+            exit();
+        }
+        
+    }
+
 }
