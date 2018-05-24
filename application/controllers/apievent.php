@@ -213,4 +213,42 @@ class Apievent extends Apibase
         }
       }
     }
+
+    public function mylist()
+    {
+      $org_id = $this->user['user_org_id'];
+      if($org_id == "0"){
+          $data['success'] = false;
+          $data['msg'] = "You need to create organizer!";
+          echo json_encode($data);
+          exit();
+      }
+
+      $events = $this->event_model->getListbyOrgId($this->user['user_org_id']);
+      if(!$events)
+      {
+        $data['success'] = false;
+        $data['msg'] = "There is not any events.";
+        echo json_encode($data);
+        exit();
+      }
+
+      else
+      {
+        $data['success'] = true;
+         foreach ($events as $key => $event) 
+         {
+              $tickets = $this->ticket_model->getTickets($event["event_id"]);
+              $org = $this->org_model->getOrg($event["event_org_id"]);
+              $events[$key]['tickets'] = $tickets;
+              $events[$key]['org'] = $org;
+              $events[$key]['is_liked'] = true;
+         }
+        $data['success'] = true;
+        $data['events'] = $events;
+
+        echo json_encode($data);
+        exit();
+      }
+    }
 }

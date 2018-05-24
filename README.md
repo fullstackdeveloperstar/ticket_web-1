@@ -407,6 +407,78 @@ update event
 		      "event_created_dtm":"2018-05-21 08:04:45"
 		   }
 		}
+
+my events list
+	
+	-get http://localhost/api/event/mylist
+	-header
+		token
+	-response
+		{  
+		   "success":true,
+		   "events":[  
+		      {  
+		         "event_id":"8",
+		         "event_title":"test event title",
+		         "event_description":"test description",
+		         "event_image":"http:\/\/localhost\/assets\/uploads\/event_image\/6a841e80de2d1db291658d370698c851.jpg",
+		         "event_start_date_time":"2018-05-24 22:30:00",
+		         "event_end_date_time":"2018-05-24 22:30:00",
+		         "event_address1":"asdf",
+		         "event_address_2":"asdf",
+		         "event_lat":"2134",
+		         "event_long":"2234",
+		         "event_org_id":"12",
+		         "event_created_dtm":"2018-05-23 23:52:18",
+		         "tickets":[  
+
+		         ],
+		         "org":{  
+		            "org_id":"12",
+		            "org_email":"test@mail.com",
+		            "org_name":"test",
+		            "org_image":"http:\/\/localhost\/assets\/uploads\/org_image\/d5ca862c9b1a19186357cb4843eb4786.jpg",
+		            "org_description":"test",
+		            "org_created_dtm":"2018-05-20 02:39:42"
+		         },
+		         "is_liked":true
+		      },
+		      {  
+		         "event_id":"14",
+		         "event_title":"uuuuuu",
+		         "event_description":"Y",
+		         "event_image":"http:\/\/192.168.0.62\/assets\/uploads\/event_image\/eb6c0a5690e685a1a1229ca918eca279.jpg",
+		         "event_start_date_time":"2018-05-31 13:30:00",
+		         "event_end_date_time":"2018-05-31 13:30:00",
+		         "event_address1":"P Charge Parking Lot",
+		         "event_address_2":"P Charge Parking Lot",
+		         "event_lat":"39.89056",
+		         "event_long":"116.394105",
+		         "event_org_id":"12",
+		         "event_created_dtm":"2018-05-24 02:47:02",
+		         "tickets":[  
+		            {  
+		               "ticket_id":"11",
+		               "ticket_type":"uuuu",
+		               "ticket_price":"2",
+		               "ticket_counts":"300",
+		               "ticket_sold_counts":"0",
+		               "ticket_event_id":"14",
+		               "ticket_created_dtm":"2018-05-24 00:36:40"
+		            }
+		         ],
+		         "org":{  
+		            "org_id":"12",
+		            "org_email":"test@mail.com",
+		            "org_name":"test",
+		            "org_image":"http:\/\/localhost\/assets\/uploads\/org_image\/d5ca862c9b1a19186357cb4843eb4786.jpg",
+		            "org_description":"test",
+		            "org_created_dtm":"2018-05-20 02:39:42"
+		         },
+		         "is_liked":true
+		      }
+		   ]
+		}
 	
 
 org apis
