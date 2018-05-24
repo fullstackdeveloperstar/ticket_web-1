@@ -360,7 +360,7 @@ creat event
 	-header
 		token
 	-request
-		event_title, event_desscription, event_start_date_time, event_end_date_time,event_address1, event_address2, event_lat, event_lang, event_image
+		event_title, event_description, event_start_date_time, event_end_date_time,event_address1, event_address2, event_lat, event_long, event_image
 	-response
 		{  
 		   "success":true,

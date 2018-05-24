@@ -202,7 +202,6 @@ class Apievent extends Apibase
           $uploaddata =  $this->upload->data();
           $data['event_image'] = base_url()."assets/uploads/event_image/".$uploaddata['file_name'];
           
-          
           $event_id = $this->input->post('event_id');
           $this->event_model->updateEvent($event_id, $data);
 

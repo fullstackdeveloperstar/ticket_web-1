@@ -49,7 +49,8 @@ $route['api/user/countticketsandliked'] = 'apiuser/getTicketsAndLikedEventsCount
 $route['api/event/getall'] = "apievent/index";
 $route['api/event/liked'] = "apievent/getLikedEventsList";
 $route['api/event/toggle_like'] = "apievent/toggleLike";
-$route['api/event/create'] = "apievent/updateEvent";
+$route['api/event/create'] = "apievent/createEvent";
+$route['api/event/update'] = "apievent/updateEvent";
 
 // org apis
 $route['api/org/create'] = "apiorg/createOrg";
