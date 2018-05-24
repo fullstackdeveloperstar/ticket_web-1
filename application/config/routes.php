@@ -51,6 +51,7 @@ $route['api/event/liked'] = "apievent/getLikedEventsList";
 $route['api/event/toggle_like'] = "apievent/toggleLike";
 $route['api/event/create'] = "apievent/createEvent";
 $route['api/event/update'] = "apievent/updateEvent";
+$route['api/event/update1'] = "apievent/updateEvent1";
 $route['api/event/mylist'] = "apievent/mylist";
 
 // org apis

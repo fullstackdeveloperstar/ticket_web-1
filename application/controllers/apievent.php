@@ -214,6 +214,45 @@ class Apievent extends Apibase
       }
     }
 
+    public function updateEvent1()
+    {
+      $this->form_validation->set_rules('event_id','Event Id','required');
+      $this->form_validation->set_rules('event_title','Event Title','required');
+      $this->form_validation->set_rules('event_description','Event description','required|max_length[2048]|xss_clean');
+      $this->form_validation->set_rules('event_start_date_time','Event Start Date','required|max_length[128]|xss_clean');
+      $this->form_validation->set_rules('event_end_date_time','Event Start Date','required|max_length[128]|xss_clean');
+      $this->form_validation->set_rules('event_address1','Event address 1','required|max_length[128]|xss_clean');
+      $this->form_validation->set_rules('event_address2','Event address 2','required|max_length[128]|xss_clean');
+      $this->form_validation->set_rules('event_lat','Event lat','required|max_length[128]|xss_clean');
+      $this->form_validation->set_rules('event_long','Event long','required|max_length[128]|xss_clean');
+      if($this->form_validation->run() == FALSE)
+      {
+        $data['success'] = false;
+        $data['msg'] = "All data is required!!!";
+        echo json_encode($data);
+        exit();
+      }
+      else
+      {
+          $data['event_title'] = $this->input->post('event_title');
+          $data['event_description'] = $this->input->post('event_description');
+          $data['event_start_date_time'] = $this->input->post('event_start_date_time');
+          $data['event_end_date_time'] = $this->input->post('event_end_date_time');
+          $data['event_address1'] = $this->input->post('event_address1');
+          $data['event_address_2'] = $this->input->post('event_address2');
+          $data['event_lat'] = $this->input->post('event_lat');
+          $data['event_long'] = $this->input->post('event_long');
+          $event_id = $this->input->post('event_id');
+          $this->event_model->updateEvent($event_id, $data);
+
+          $return_data['success'] = true;
+          $return_data['msg'] = "Event is updated successfully!"; 
+          $return_data['event'] = $this->event_model->getEvent($event_id);
+          echo json_encode($return_data);
+          exit();
+      }
+    }
+
     public function mylist()
     {
       $org_id = $this->user['user_org_id'];
