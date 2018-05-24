@@ -383,7 +383,7 @@ creat event
 
 update event
 
-	-post http://localhost/api/event/create
+	-post http://localhost/api/event/update
 	-header
 		token
 	-request

@@ -10,7 +10,6 @@ class Ticket_model extends CI_Model
     	$this->db->order_by('ticket_price', 'ASC');
     	$query = $this->db->get($this->table_name);
     	$result = $query->result_array();
-
     	return $result;
     }
 
