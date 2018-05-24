@@ -1,6 +1,7 @@
 <?php if(!defined('BASEPATH')) exit('No direct script access allowed');
 
 require  'apibase.php';
+require_once APPPATH."third_party/stripe/init.php";
 
 class Apievent extends Apibase
 {
@@ -141,7 +142,18 @@ class Apievent extends Apibase
             $data['event_image'] = base_url()."assets/uploads/event_image/".$uploaddata['file_name'];
             $data['event_org_id'] = $this->user['user_org_id'];
             $event_id = $this->event_model->creatEvent($data);
+            $prod_info = $this->creatProduct($event_id);
+            if(!$prod_info)
+            {
+              $data['success'] = false;
+              $data['msg'] = "Stripe Product creation error";
+              echo json_encode($data);
+              exit();
+            }
 
+            $data['stripe_product_id'] = $prod_info['id'];
+
+            $this->event_model->updateEvent($event_id, $data);
             $return_data['success'] = true;
             $return_data['msg'] = "Event is created successfully!"; 
             $return_data['event'] = $this->event_model->getEvent($event_id);
@@ -203,8 +215,25 @@ class Apievent extends Apibase
           $data['event_image'] = base_url()."assets/uploads/event_image/".$uploaddata['file_name'];
           
           $event_id = $this->input->post('event_id');
-          $this->event_model->updateEvent($event_id, $data);
+          
+          $event = $this->event_model->getEvent($event_id);
 
+          if($event['stripe_product_id'] == "" || $event['stripe_product_id'] == null)
+          {
+            $prod_info = $this->creatProduct($event_id);
+            if(!$prod_info)
+            {
+              $data['success'] = false;
+              $data['msg'] = "Stripe Product creation error";
+              echo json_encode($data);
+              exit();
+            }
+
+            $data['stripe_product_id'] = $prod_info['id'];
+          }
+
+          $this->event_model->updateEvent($event_id, $data);
+          
           $return_data['success'] = true;
           $return_data['msg'] = "Event is updated successfully!"; 
           $return_data['event'] = $this->event_model->getEvent($event_id);
@@ -243,6 +272,25 @@ class Apievent extends Apibase
           $data['event_lat'] = $this->input->post('event_lat');
           $data['event_long'] = $this->input->post('event_long');
           $event_id = $this->input->post('event_id');
+
+
+          $event = $this->event_model->getEvent($event_id);
+          
+          if($event['stripe_product_id'] == "" || $event['stripe_product_id'] == null)
+          {
+            $prod_info = $this->creatProduct($event_id);
+            if(!$prod_info)
+            {
+              $data['success'] = false;
+              $data['msg'] = "Stripe Product creation error";
+              echo json_encode($data);
+              exit();
+            }
+
+            $data['stripe_product_id'] = $prod_info['id'];
+          }
+
+
           $this->event_model->updateEvent($event_id, $data);
 
           $return_data['success'] = true;
@@ -289,5 +337,43 @@ class Apievent extends Apibase
         echo json_encode($data);
         exit();
       }
+    }
+
+
+    public function creatProduct($event_id)
+    {
+      // stripe create product
+       $stripe = array(
+        "secret_key"      => STRIPE_SECRET_KEY,
+        "publishable_key" => STRIPE_PUBLISHABLE_KEY
+      );
+      try{
+      \Stripe\Stripe::setApiKey($stripe['secret_key']);
+
+      $stripe_create_pro = \Stripe\Product::create(array(
+        "name" => 'event_'.$event_id,
+        "type" => "good",
+        "attributes" => ["type"]
+      ));
+      return $stripe_create_pro;
+    }
+      catch (\Stripe\Error\RateLimit $e) {
+        // Too many requests made to the API too quickly
+      } catch (\Stripe\Error\InvalidRequest $e) {
+        // Invalid parameters were supplied to Stripe's API
+      } catch (\Stripe\Error\Authentication $e) {
+        // Authentication with Stripe's API failed
+        // (maybe you changed API keys recently)
+      } catch (\Stripe\Error\ApiConnection $e) {
+        // Network communication with Stripe failed
+      } catch (\Stripe\Error\Base $e) {
+        // Display a very generic error to the user, and maybe send
+        // yourself an email
+      } catch (Exception $e) {
+
+      }     
+      // end create product
+
+      return false;
     }
 }

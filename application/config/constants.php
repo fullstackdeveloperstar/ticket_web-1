@@ -57,5 +57,8 @@ define('SMTP_USER',                             'rubby.star.sg@gmail.com');		// 
 define('SMTP_PASS',                             'soksunae');	// your smtp password
 define('MAIL_PATH',                             '/usr/sbin/sendmail');
 
+define('STRIPE_SECRET_KEY',                     'sk_test_kGOoDloV76g6NqsAmD2dAOo4');
+define('STRIPE_PUBLISHABLE_KEY',                'pk_test_BG3B795ufY1LeRwBXTK4SNp6');
+
 /* End of file constants.php */
 /* Location: ./application/config/constants.php */

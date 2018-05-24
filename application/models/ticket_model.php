@@ -26,4 +26,17 @@ class Ticket_model extends CI_Model
         $this->db->where('ticket_id', $ticket_id);
         $this->db->update($this->table_name, $data);
     }
+
+    public function getTicket($ticket_id)
+    {
+        $this->db->where('ticket_id', $ticket_id);
+        $query = $this->db->get($this->table_name);
+        $result = $query->result_array();
+
+        if(count($result) > 0)
+        {
+            return $result[0];
+        }
+        return false;
+    }
 }
