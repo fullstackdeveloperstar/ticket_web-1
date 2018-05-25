@@ -32,4 +32,22 @@ class Order_model extends CI_Model
         
         return TRUE;
     }
+
+    public function getOrderWhere($where)
+    {
+        $this->db->where($where);
+        $query = $this->db->get($this->table_name);
+        $result = $query->result_array();
+
+        if(count($result)>0){
+            return $result;
+        }
+        return false;
+    }
+
+    public function check($order_id)
+    {
+        $this->db->where('order_id', $order_id);
+        $this->db->update($this->table_name, array('order_status'=>'checked'));
+    }
 }

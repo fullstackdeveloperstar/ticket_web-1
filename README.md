@@ -783,3 +783,13 @@ order pay
 		token, order_id
 	-response
 		{"success":true,"msg":"Order is paied successfully."}
+
+order check
+	
+	-post http://localhost/api/ticket/check
+	-header
+		token
+	-request
+		stripe_order_id, order_id
+	-response 
+		{"success":true,"msg":"Order is checked"}

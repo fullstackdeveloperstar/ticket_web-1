@@ -64,6 +64,8 @@ $route['api/ticket/create'] = "apiticket/createTicket";
 $route['api/ticket/update'] = "apiticket/updateTicket";
 $route['api/ticket/order'] = "apiticket/orderTicket";
 $route['api/ticket/pay'] = "apiticket/orderPay";
+$route['api/ticket/check'] = "apiticket/check";
+
 
 
 // stripe

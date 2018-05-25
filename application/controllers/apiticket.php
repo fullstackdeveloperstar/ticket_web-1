@@ -462,7 +462,7 @@ class Apiticket extends Apibase
     public function orderPay()
     {
         $this->form_validation->set_rules('token','Token','required');
-        $this->form_validation->set_rules('order_id','Org description','required|numeric');
+        $this->form_validation->set_rules('order_id','Order id','required|numeric');
 
           if($this->form_validation->run() == FALSE)
         {
@@ -548,6 +548,65 @@ class Apiticket extends Apibase
           }
 
           return false;
-          
+    }
+
+    public function check()
+    {
+        if($this->user['user_org_id'] == "0" || $this->user['user_org_id'] == null){
+            $data['success'] = false;
+            $data['msg'] = "Your permission is not allowed!!!";
+            echo json_encode($data);
+            exit();
+        }
+
+        $this->form_validation->set_rules('stripe_order_id','Stripe Order Id','required');
+        $this->form_validation->set_rules('order_id','Order Id','required|numeric');                                                                                                                                                                                                                            
+        if($this->form_validation->run() == FALSE)
+        {
+            $data['success'] = false;
+            $data['msg'] = "All data is required!";
+            echo json_encode($data);
+            exit();
+        }
+        else
+        {
+            $stripe_order_id = $this->input->post('stripe_order_id');
+            $order_id = $this->input->post('order_id');
+
+            $order = $this->order_model->getOrderWhere(array('order_id'=>$order_id, "order_stripe_order_id" => $stripe_order_id));
+
+            if(!$order)
+            {
+                $data['success'] = false;
+                $data['msg'] = "Order is not exist!";
+                echo json_encode($data);
+                exit();       
+            }
+            $order = $order[0];
+            $event = $this->event_model->getEvent($order['order_event_id']);
+            
+            if(!$event)
+            {
+                $data['success'] = false;
+                $data['msg'] = "Order is not exist!";
+                echo json_encode($data);
+                exit();          
+            }
+
+            if($event['event_org_id'] != $this->user['user_org_id'])
+            {
+                $data['success'] = false;
+                $data['msg'] = "Your permission is not allowed!";
+                echo json_encode($data);
+                exit();
+            }
+
+            $this->order_model->check($order['order_id']);
+
+            $data['success'] = true;
+            $data['msg'] = "Order is checked";
+            echo json_encode($data);
+            exit();
+        }
     }
 }
