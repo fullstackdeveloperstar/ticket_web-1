@@ -44,9 +44,9 @@ class Apiticket extends Apibase
                 $prod_info = $this->creatProduct($data['ticket_event_id']);
                 if(!$prod_info)
                 {
-                  $data['success'] = false;
-                  $data['msg'] = "Stripe Product creation error";
-                  echo json_encode($data);
+                  $error_data['success'] = false;
+                  $error_data['msg'] = "Stripe Product creation error";
+                  echo json_encode($error_data);
                   exit();
                 }
 
@@ -54,13 +54,13 @@ class Apiticket extends Apibase
                 $this->event_model->updateEvent($data['ticket_event_id'], array('stripe_product_id' => $product_id));
             }
 
-            $sku_info = $this->createSKU($product_id, $data['ticket_price'], $data['ticket_counts'], $data['ticket_type']);
+            $sku_info = $this->createSKU($product_id, $data['ticket_price'], $data['ticket_counts'], $data['ticket_type'],$data['ticket_event_id']);
 
             if(!$sku_info)
             {
-                $data['success'] = false;
-                $data['msg'] = "Can't create SKU for this ticket.";
-                echo json_encode($data);
+                $error_data['success'] = false;
+                $error_data['msg'] = "Can't create SKU for this ticket.";
+                echo json_encode($error_data);
                 exit();
             }
             $data['ticket_sku_id'] = $sku_info['id'];
@@ -68,6 +68,14 @@ class Apiticket extends Apibase
             $ticket_id = $this->ticket_model->addTicket($data);
             $return_data['success'] = true;
             $return_data['msg'] = "Ticket is created successfully";
+
+            $tickets = $this->ticket_model->getTickets($event["event_id"]);
+            $org = $this->org_model->getOrg($event["event_org_id"]);
+            $isliked = $this->event_like_model->isLiked($this->user['userId'], $event['event_id']);
+            $event['tickets'] = $tickets;
+            $event['org'] = $org;
+            $event['is_liked'] = $isliked;
+            $return_data['event'] =  $event;
 
             echo json_encode($return_data);
             exit();
@@ -96,16 +104,16 @@ class Apiticket extends Apibase
             
             $ticket = $this->ticket_model->getTicket($ticket_id);
             if(!$ticket){
-                $data['success'] = false;
-                $data['msg'] = "Ticket is not exist";
-                echo json_encode($data);
+                $error_data['success'] = false;
+                $error_data['msg'] = "Ticket is not exist";
+                echo json_encode($error_data);
                 exit();
             }
-
+            $event = $this->event_model->getEvent($ticket['ticket_event_id']);
             $sku_id = $ticket['ticket_sku_id'];
             if($sku_id == "" || $sku_id == null)
             {
-                $event = $this->event_model->getEvent($ticket['ticket_event_id']);
+                
 
                 $product_id = $event['stripe_product_id'];
                 if($product_id == "" || $product_id == null)
@@ -113,9 +121,9 @@ class Apiticket extends Apibase
                     $prod_info = $this->creatProduct($ticket['ticket_event_id']);
                     if(!$prod_info)
                     {
-                      $data['success'] = false;
-                      $data['msg'] = "Stripe Product creation error";
-                      echo json_encode($data);
+                      $error_data['success'] = false;
+                      $error_data['msg'] = "Stripe Product creation error";
+                      echo json_encode($error_data);
                       exit();
                     }
 
@@ -124,16 +132,16 @@ class Apiticket extends Apibase
                 }
 
 
-                $sku_info = $this->createSKU($product_id, $data['ticket_price'], $data['ticket_counts'], $data['ticket_type']);
+                $sku_info = $this->createSKU($product_id, $data['ticket_price'], $data['ticket_counts'], $data['ticket_type'], $ticket['ticket_event_id']);
                 $sku_id = $sku_info['id'];
 
             }
             else {
-                if(!$this->updateSKU($sku_id, $data['ticket_price'], $data['ticket_counts'], $data['ticket_type']))
+                if(!$this->updateSKU($sku_id, $data['ticket_price'], $data['ticket_counts'], $data['ticket_type'], $ticket['ticket_event_id']))
                 {
-                  $data['success'] = false;
-                  $data['msg'] = "SKU update Error";
-                  echo json_encode($data);
+                  $error_data['success'] = false;
+                  $error_data['msg'] = "SKU update Error";
+                  echo json_encode($error_data);
                   exit();
                 }
             }
@@ -143,12 +151,21 @@ class Apiticket extends Apibase
 
             $return_data['success'] = true;
             $return_data['msg'] = "Ticket is updated successfully";
+
+            $tickets = $this->ticket_model->getTickets($event["event_id"]);
+            $org = $this->org_model->getOrg($event["event_org_id"]);
+            $isliked = $this->event_like_model->isLiked($this->user['userId'], $event['event_id']);
+            $event['tickets'] = $tickets;
+            $event['org'] = $org;
+            $event['is_liked'] = $isliked;
+            $return_data['event'] =  $event;
+            
             echo json_encode($return_data);
             exit();
         }
     }
 
-    public function createSKU($product, $price, $quantity,$type)
+    public function createSKU($product, $price, $quantity,$type, $event_id)
     {
         $stripe = array(
             "secret_key"      => STRIPE_SECRET_KEY,
@@ -160,7 +177,7 @@ class Apiticket extends Apibase
             $sku_info = \Stripe\SKU::create(array(
               "product" => $product,
               "attributes" => array(
-                "type" => $type,
+                "type" => "sku_".$event_id."_".$type,
               ),
               "price" => $price,
               "currency" => "usd",
@@ -234,7 +251,7 @@ class Apiticket extends Apibase
       return false;
     }
 
-    public function updateSKU($sku_id,$price, $quantity,$type)
+    public function updateSKU($sku_id,$price, $quantity,$type,  $event_id)
     {   
         $stripe = array(
             "secret_key"      => STRIPE_SECRET_KEY,
@@ -245,7 +262,7 @@ class Apiticket extends Apibase
             $sku = \Stripe\SKU::retrieve($sku_id);
             $sku->price = $price;
             $sku->inventory['quantity'] = $quantity;
-            $sku->attributes= array('type'=>$type);
+            $sku->attributes= array('type'=>"sku_".$event_id."_".$type);
             $response = $sku->save();
             return true;
         }

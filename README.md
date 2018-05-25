@@ -633,9 +633,55 @@ create ticket
 	-request
 		ticket_type, ticket_price, ticket_counts, ticket_event_id
 	-response
-		{
-			"success":true,
-			"msg":"Ticket is created successfully"
+		{  
+		   "success":true,
+		   "msg":"Ticket is created successfully",
+		   "event":{  
+		      "event_id":"9",
+		      "event_title":"I am sorry ",
+		      "event_description":"Yes ",
+		      "event_image":"http:\/\/192.168.0.62\/assets\/uploads\/event_image\/195deb2a081250415485d110f14b35cb.jpg",
+		      "event_start_date_time":"2018-05-24 22:30:00",
+		      "event_end_date_time":"2018-05-24 22:30:00",
+		      "event_address1":"Hokkaido",
+		      "event_address_2":"Hokkaido",
+		      "event_lat":"22.331277",
+		      "event_long":"114.200629",
+		      "event_org_id":"21",
+		      "stripe_product_id":"prod_CvMDZRLrQeJbL4",
+		      "event_created_dtm":"2018-05-24 23:17:36",
+		      "tickets":[  
+		         {  
+		            "ticket_id":"41",
+		            "ticket_type":"aaaaaa",
+		            "ticket_price":"10000",
+		            "ticket_counts":"9",
+		            "ticket_sold_counts":"0",
+		            "ticket_event_id":"9",
+		            "ticket_sku_id":"sku_CvMDVNRkwHgqDn",
+		            "ticket_created_dtm":"2018-05-24 23:17:47"
+		         },
+		         {  
+		            "ticket_id":"42",
+		            "ticket_type":"aaaaaaa",
+		            "ticket_price":"10000",
+		            "ticket_counts":"9",
+		            "ticket_sold_counts":"0",
+		            "ticket_event_id":"9",
+		            "ticket_sku_id":"sku_CvMF3M8KFjChly",
+		            "ticket_created_dtm":"2018-05-24 23:19:35"
+		         }
+		      ],
+		      "org":{  
+		         "org_id":"21",
+		         "org_email":"hhh@kk.com",
+		         "org_name":"joker",
+		         "org_image":"http:\/\/192.168.0.62\/assets\/uploads\/org_image\/a4508f1bb5bb1ca549344aecc90dffcf.jpg",
+		         "org_description":"some(\"Yes \")",
+		         "org_created_dtm":"2018-05-24 00:24:13"
+		      },
+		      "is_liked":false
+		   }
 		}
 
 update ticket
@@ -648,5 +694,51 @@ update ticket
 	-response
 		{  
 		   "success":true,
-		   "msg":"Ticket is updated successfully"
+		   "msg":"Ticket is updated successfully",
+		   "event":{  
+		      "event_id":"9",
+		      "event_title":"I am sorry ",
+		      "event_description":"Yes ",
+		      "event_image":"http:\/\/192.168.0.62\/assets\/uploads\/event_image\/195deb2a081250415485d110f14b35cb.jpg",
+		      "event_start_date_time":"2018-05-24 22:30:00",
+		      "event_end_date_time":"2018-05-24 22:30:00",
+		      "event_address1":"Hokkaido",
+		      "event_address_2":"Hokkaido",
+		      "event_lat":"22.331277",
+		      "event_long":"114.200629",
+		      "event_org_id":"21",
+		      "stripe_product_id":"prod_CvMDZRLrQeJbL4",
+		      "event_created_dtm":"2018-05-24 23:17:36",
+		      "tickets":[  
+		         {  
+		            "ticket_id":"41",
+		            "ticket_type":"aadfd",
+		            "ticket_price":"10000",
+		            "ticket_counts":"9",
+		            "ticket_sold_counts":"0",
+		            "ticket_event_id":"9",
+		            "ticket_sku_id":"sku_CvMDVNRkwHgqDn",
+		            "ticket_created_dtm":"2018-05-24 23:28:14"
+		         },
+		         {  
+		            "ticket_id":"42",
+		            "ticket_type":"aaaaaaa",
+		            "ticket_price":"10000",
+		            "ticket_counts":"9",
+		            "ticket_sold_counts":"0",
+		            "ticket_event_id":"9",
+		            "ticket_sku_id":"sku_CvMF3M8KFjChly",
+		            "ticket_created_dtm":"2018-05-24 23:19:35"
+		         }
+		      ],
+		      "org":{  
+		         "org_id":"21",
+		         "org_email":"hhh@kk.com",
+		         "org_name":"joker",
+		         "org_image":"http:\/\/192.168.0.62\/assets\/uploads\/org_image\/a4508f1bb5bb1ca549344aecc90dffcf.jpg",
+		         "org_description":"some(\"Yes \")",
+		         "org_created_dtm":"2018-05-24 00:24:13"
+		      },
+		      "is_liked":false
+		   }
 		}
