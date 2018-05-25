@@ -62,7 +62,7 @@ $route['api/org/update1'] = "apiorg/updateOrg1";
 // ticket apis
 $route['api/ticket/create'] = "apiticket/createTicket";
 $route['api/ticket/update'] = "apiticket/updateTicket";
-
+$route['api/ticket/order'] = "apiticket/orderTicket";
 
 
 // stripe

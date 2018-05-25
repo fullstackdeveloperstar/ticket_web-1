@@ -742,3 +742,34 @@ update ticket
 		      "is_liked":false
 		   }
 		}
+
+order ticket
+
+	-post http://localhost/api/ticket/order
+	-header
+		token
+	-request
+		{
+			"items":[
+				{
+					"ticket_id":"1",
+					"amount":"3"
+				}
+			],
+			"event_id":"1"
+		}
+	-response
+		{  
+		   "order_id":"6",
+		   "order_user_id":"4",
+		   "order_event_id":"1",
+		   "order_tickets_info":[  
+		      {  
+		         "ticket_id":"1",
+		         "amount":"3"
+		      }
+		   ],
+		   "order_stripe_order_id":"or_1CVc4EHkcS2iiDefq9brKi9z",
+		   "order_status":"ordered",
+		   "order_created_dtm":"2018-05-25 06:18:34"
+		}

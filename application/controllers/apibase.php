@@ -10,6 +10,7 @@ class Apibase extends CI_Controller
         parent::__construct();
         $this->load->model('user_model');
         $this->load->model('org_model');
+        $this->load->model('order_model');
 
         $headers = $this->input->request_headers();
 

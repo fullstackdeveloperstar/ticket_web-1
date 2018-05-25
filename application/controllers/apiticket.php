@@ -159,7 +159,7 @@ class Apiticket extends Apibase
             $event['org'] = $org;
             $event['is_liked'] = $isliked;
             $return_data['event'] =  $event;
-            
+
             echo json_encode($return_data);
             exit();
         }
@@ -283,6 +283,179 @@ class Apiticket extends Apibase
 
           }  
 
+          return false;
+    }
+
+    public function orderTicket()
+    {
+   
+        if(strcasecmp($_SERVER['REQUEST_METHOD'], 'POST') != 0){
+            // throw new Exception('Request method must be POST!');
+            $data['success'] = false;
+            $data['msg'] = 'Request method must be POST!';
+            echo json_encode($data);
+            exit();
+        }
+         
+        //Make sure that the content type of the POST request has been set to application/json
+        $contentType = isset($_SERVER["CONTENT_TYPE"]) ? trim($_SERVER["CONTENT_TYPE"]) : '';
+        if(strcasecmp($contentType, 'application/json') != 0){
+            // throw new Exception('Content type must be: application/json');
+            $data['success'] = false;
+            $data['msg'] = 'Content type must be: application/json';
+            echo json_encode($data);
+            exit();
+        }
+         
+        //Receive the RAW post data.
+        $content = trim(file_get_contents("php://input"));
+         
+        //Attempt to decode the incoming RAW post data from JSON.
+        $decoded = json_decode($content, true);
+         
+        //If json_decode failed, the JSON is invalid.
+        if(!is_array($decoded)){
+            throw new Exception('Received content contained invalid JSON!');
+            $data['success'] = false;
+            $data['msg'] = 'Content type must be: application/json';
+            echo json_encode($data);
+            exit();
+        }
+         
+        //Process the JSON.
+        $items = $decoded['items'];
+        $temp_items = $items;
+        
+        if(count($items) == 0)
+        {
+            $data['success'] = false;
+            $data['msg'] = 'Item amounts must be more than 1!!!';
+            echo json_encode($data);
+            exit();
+        }
+
+        if(!isset($decoded['event_id']) || $decoded['event_id'] == null || $decoded['event_id'] == "")
+        {
+            $data['success'] = false;
+            $data['msg'] = 'Event id is missing.';
+            echo json_encode($data);
+            exit();   
+        } else {
+            $event_id = $decoded['event_id'];
+            $event = $this->event_model->getEvent($event_id);
+            if(!$event ){
+                $data['success'] = false;
+                $data['msg'] = 'Event is not exist.';
+                echo json_encode($data);
+                exit();   
+            }
+        }
+
+        foreach ($items as $key => $item) {
+            if($item['amount'] == 0)
+            {
+                $data['success'] = false;
+                $data['msg'] = 'Amount must be much more than 1.';
+                echo json_encode($data);
+                exit();       
+            }
+
+            $ticket = $this->ticket_model->getTicket($item['ticket_id']);
+
+            if(!$ticket){
+                $data['success'] = false;
+                $data['msg'] = 'Ticket is not exist';
+                echo json_encode($data);
+                exit();          
+            }
+
+            if($ticket['ticket_sku_id'] == "")
+            {
+                $data['success'] = false;
+                $data['msg'] = 'SKU is not exist';
+                echo json_encode($data);
+                exit();             
+            }
+            if ($event_id != $ticket['ticket_event_id'])
+            {
+                $data['success'] = false;
+                $data['msg'] = 'Event id and ticket is not matched.';
+                echo json_encode($data);
+                exit();   
+            }
+
+            $items[$key]['ticket'] = $ticket;
+
+        }
+        
+        $orderinfo = array();
+        $orderinfo['currency'] = 'usd';
+        $order_items = array();
+        foreach ($items as $key => $item) {
+            $temp_item['parent'] = $item['ticket']['ticket_sku_id'];
+            $temp_item['quantity'] = $item['amount'];
+            array_push($order_items, $temp_item); 
+        }
+        $orderinfo['items'] = $order_items;
+        $orderinfo['shipping'] = array(
+            "name" => $this->user['fname'] . " " . $this->user['lname'],
+            "address" => array(
+              "line1" => $this->user['user_addr_street'],
+              "city" => $this->user['user_addr_city'],
+              "state" => $this->user['user_addr_state'],
+              "country" => $this->user['user_addr_country'],
+              "postal_code" => $this->user['user_addr_postal']
+            )
+        );
+        $orderinfo['email'] = $this->user['email'];
+
+        $order = $this->orders($orderinfo);
+
+        $order_data['order_stripe_order_id'] = $order['id'];
+        $order_data['order_user_id'] = $this->user['userId'];
+        $order_data['order_tickets_info'] = json_encode($temp_items);
+        $order_data['order_event_id'] = $event_id;
+        $ordered_id = $this->order_model->addOrder($order_data);
+        
+        $get_order = $this->order_model->getOrder($ordered_id);
+        
+        $get_order['order_tickets_info'] = json_decode($get_order['order_tickets_info']);
+        echo json_encode($get_order);
+        
+
+    }
+
+    private function orders($orderinfo)
+    {
+        $stripe = array(
+        "secret_key"      => STRIPE_SECRET_KEY,
+        "publishable_key" => STRIPE_PUBLISHABLE_KEY
+        );
+        try{
+            \Stripe\Stripe::setApiKey($stripe['secret_key']);
+             $response = \Stripe\Order::create($orderinfo);
+             return $response;
+        } 
+         catch (\Stripe\Error\RateLimit $e) {
+            // Too many requests made to the API too quickly
+           
+          } catch (\Stripe\Error\InvalidRequest $e) {
+            // Invalid parameters were supplied to Stripe's API
+            
+          } catch (\Stripe\Error\Authentication $e) {
+            // Authentication with Stripe's API failed
+            // (maybe you changed API keys recently)
+           
+          } catch (\Stripe\Error\ApiConnection $e) {
+            // Network communication with Stripe failed
+            
+          } catch (\Stripe\Error\Base $e) {
+            // Display a very generic error to the user, and maybe send
+            // yourself an email
+       
+          } catch (Exception $e) {
+       
+          }
           return false;
     }
 }
