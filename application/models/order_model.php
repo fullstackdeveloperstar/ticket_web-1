@@ -24,4 +24,12 @@ class Order_model extends CI_Model
 
     	return $result[0];
     }
+
+    public function updateOrder($order_id, $order)
+    {
+        $this->db->where('order_id', $order_id);
+        $this->db->update($this->table_name, $order);
+        
+        return TRUE;
+    }
 }

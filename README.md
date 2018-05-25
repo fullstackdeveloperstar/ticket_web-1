@@ -773,3 +773,13 @@ order ticket
 		   "order_status":"ordered",
 		   "order_created_dtm":"2018-05-25 06:18:34"
 		}
+
+order pay
+	
+	-post http://localhost/api/ticket/pay
+	-header
+		token
+	-request
+		token, order_id
+	-response
+		{"success":true,"msg":"Order is paied successfully."}

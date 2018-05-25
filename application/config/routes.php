@@ -63,6 +63,7 @@ $route['api/org/update1'] = "apiorg/updateOrg1";
 $route['api/ticket/create'] = "apiticket/createTicket";
 $route['api/ticket/update'] = "apiticket/updateTicket";
 $route['api/ticket/order'] = "apiticket/orderTicket";
+$route['api/ticket/pay'] = "apiticket/orderPay";
 
 
 // stripe
@@ -71,6 +72,7 @@ $route['stripe_test/check'] = "stripe/check";
 $route['stripe_test/payment_success'] = 'stripe/payment_success';
 $route['stripe_test/payment_error'] = 'stripe/payment_error';
 $route['stripe_test/help'] = 'stripe/help';
+$route['stripe_test/orderpay'] = 'stripe/order_pay';
 
 $route['api/isloggedin'] = "apilogin/isLoggedIn";
 $route['api'] = 'Apiuser/index';

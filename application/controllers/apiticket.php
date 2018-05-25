@@ -458,4 +458,96 @@ class Apiticket extends Apibase
           }
           return false;
     }
+
+    public function orderPay()
+    {
+        $this->form_validation->set_rules('token','Token','required');
+        $this->form_validation->set_rules('order_id','Org description','required|numeric');
+
+          if($this->form_validation->run() == FALSE)
+        {
+            $data['success'] = false;
+            $data['msg'] = "All data is required!";
+            echo json_encode($data);
+            exit();
+        }
+        else
+        {
+            $order_id = $this->input->post('order_id');
+            $token = $this->input->post('token');
+            $order = $this->order_model->getOrder($order_id);
+            if(!$order)
+            {
+                $data['success'] = false;
+                $data['msg'] = 'Order is not exist.';
+                echo json_encode($data);
+                exit(); 
+            }
+
+            if($order['order_status'] != "checked")
+            {
+                $data['success'] = false;
+                $data['msg'] = 'Order is not checked yet.';
+                echo json_encode($data);
+                exit(); 
+            }
+            
+            $response = $this->orderPayStripe($order['order_stripe_order_id'], $token);
+
+            if(!$response)
+            {
+                $data['success'] = false;
+                $data['msg'] = 'Pay is not done! Please try again';
+                echo json_encode($data);
+                exit();    
+            }
+            $order['order_status'] = 'paid';
+            $this->order_model->updateOrder($order_id, $order);
+            $data['success'] = true;
+            $data['msg'] = 'Order is paied successfully.';
+            echo json_encode($data);
+            exit(); 
+        }
+    }
+
+    private function orderPayStripe($order_id, $token)
+    {
+         $stripe = array(
+            "secret_key"      => STRIPE_SECRET_KEY,
+            "publishable_key" => STRIPE_PUBLISHABLE_KEY
+        );
+        try{
+              \Stripe\Stripe::setApiKey($stripe['secret_key']);
+               $order = \Stripe\Order::retrieve($order_id);
+               $response = $order->pay(array(
+                  "source" => $token // obtained with Stripe.js
+                ));
+               // var_dump($response);
+
+               return $response;
+        } 
+         catch (\Stripe\Error\RateLimit $e) {
+            // Too many requests made to the API too quickly
+           // var_dump($e);
+          } catch (\Stripe\Error\InvalidRequest $e) {
+            // Invalid parameters were supplied to Stripe's API
+            // var_dump($e);
+          } catch (\Stripe\Error\Authentication $e) {
+            // Authentication with Stripe's API failed
+            // (maybe you changed API keys recently)
+           // var_dump($e);
+          } catch (\Stripe\Error\ApiConnection $e) {
+            // Network communication with Stripe failed
+                // var_dump($e);
+          } catch (\Stripe\Error\Base $e) {
+            // Display a very generic error to the user, and maybe send
+            // yourself an email
+            // var_dump($e);
+          } catch (Exception $e) {
+            // var_dump($e);
+          }
+
+          return false;
+          
+    }
 }

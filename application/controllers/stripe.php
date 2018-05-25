@@ -128,4 +128,9 @@ class Stripe extends CI_Controller {
 	{
 		$this->load->view('stripe/help');
 	}
+
+	public function order_pay()
+	{
+		$this->load->view('stripe/order_pay');
+	}
 }
