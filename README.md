@@ -1,6 +1,6 @@
 login
 
-	-post http://159.203.99.60/api/login
+	-post http://localhost/api/login
 	-request
 		email, password, device_token
 	-response
@@ -33,7 +33,7 @@ login
 
 signup
 
-	-post http://159.203.99.60/api/signup
+	-post http://localhost/api/signup
 	-request 
 		fname, lname, email, password, cpassword, device_token
 	-response
@@ -66,7 +66,7 @@ signup
 
 forgot password
 
-	-post http://159.203.99.60/api/forgotpassword
+	-post http://localhost/api/forgotpassword
 	-request
 		email
 	-response
@@ -84,7 +84,7 @@ users api
 
 myinfo
 	
-	-get http://159.203.99.60/api/user/myinfo
+	-get http://localhost/api/user/myinfo
 	-header
 		token
 	-response
@@ -108,7 +108,7 @@ myinfo
 
 update
 
-	-post http://159.203.99.60/api/user/update
+	-post http://localhost/api/user/update
 	-header 
 		token
 	-request
@@ -146,7 +146,7 @@ update
 
 update1
 
-	-post http://159.203.99.60/api/user/update1
+	-post http://localhost/api/user/update1
 	-header 
 		token
 	-request
@@ -178,7 +178,7 @@ upload profile image
 
 change password
 	
-	-post http://159.203.99.60/api/user/changepassword
+	-post http://localhost/api/user/changepassword
 	-header 
 		token
 	-request
@@ -196,7 +196,7 @@ change password
 
 tickets and liked event counts
 	
-	-get http://159.203.99.60/api/user/countticketsandliked
+	-get http://localhost/api/user/countticketsandliked
 	-header
 		token
 	-response
@@ -210,7 +210,7 @@ Event Apis
 
 event list
 	
-	-get http://159.203.99.60/api/event/getall
+	-get http://localhost/api/event/getall
 
 	-request
 		header: token
@@ -289,7 +289,7 @@ event list
 
 liked events list
 
-	-get http://159.203.99.60/api/event/liked
+	-get http://localhost/api/event/liked
 	-header
 		token
 	-response
