@@ -790,6 +790,6 @@ order check
 	-header
 		token
 	-request
-		stripe_order_id, order_id
+		stripe_order_id
 	-response 
 		{"success":true,"msg":"Order is checked"}

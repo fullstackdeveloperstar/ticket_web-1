@@ -560,7 +560,7 @@ class Apiticket extends Apibase
         }
 
         $this->form_validation->set_rules('stripe_order_id','Stripe Order Id','required');
-        $this->form_validation->set_rules('order_id','Order Id','required|numeric');                                                                                                                                                                                                                            
+        // $this->form_validation->set_rules('order_id','Order Id','required|numeric');                                                                                                                                                                                                                            
         if($this->form_validation->run() == FALSE)
         {
             $data['success'] = false;
@@ -571,9 +571,10 @@ class Apiticket extends Apibase
         else
         {
             $stripe_order_id = $this->input->post('stripe_order_id');
-            $order_id = $this->input->post('order_id');
+            // $order_id = $this->input->post('order_id');
 
-            $order = $this->order_model->getOrderWhere(array('order_id'=>$order_id, "order_stripe_order_id" => $stripe_order_id));
+            // $order = $this->order_model->getOrderWhere(array('order_id'=>$order_id, "order_stripe_order_id" => $stripe_order_id));
+            $order = $this->order_model->getOrderWhere(array("order_stripe_order_id" => $stripe_order_id));
 
             if(!$order)
             {
