@@ -66,7 +66,8 @@ $route['api/ticket/order'] = "apiticket/orderTicket";
 $route['api/ticket/pay'] = "apiticket/orderPay";
 $route['api/ticket/check'] = "apiticket/check";
 
-
+// order apis
+$route['api/order/getorders'] = "apiorder/getOrders";
 
 // stripe
 $route['stripe_test/index'] = "stripe/index";

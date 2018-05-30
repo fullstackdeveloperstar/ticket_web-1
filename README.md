@@ -793,3 +793,71 @@ order check
 		stripe_order_id
 	-response 
 		{"success":true,"msg":"Order is checked"}
+
+
+Order apis
+
+	-get http://localhost/api/order/getorders
+	-header
+		token
+	-response
+		[  
+		   {  
+		      "order_id":"1",
+		      "order_user_id":"4",
+		      "order_event_id":"1",
+		      "order_tickets_info":[  
+		         {  
+		            "ticket_id":"1",
+		            "amount":"3"
+		         }
+		      ],
+		      "order_stripe_order_id":"or_1CVbuIHkcS2iiDef6h60YQfl",
+		      "order_status":"checked",
+		      "order_created_dtm":"2018-05-25 10:30:16",
+		      "order":{  
+		         "event_id":"1",
+		         "event_title":"test Event Title",
+		         "event_description":"Our currency rankings show that the most popular Euro exchange rate is the USD to EUR rate. The currency code for Euros is EUR, and the currency symbol is \u20ac.",
+		         "event_image":"http:\/\/192.168.0.62\/assets\/uploads\/event_image\/test.png",
+		         "event_start_date_time":"2018-05-17 03:00:10",
+		         "event_end_date_time":"2018-05-17 04:00:10",
+		         "event_address1":"NYC rails 1234",
+		         "event_address_2":"New York city , United States",
+		         "event_lat":"17.845098",
+		         "event_long":"-29.330223",
+		         "event_org_id":"1",
+		         "stripe_product_id":"prod_Cv8699nAcW9LNb",
+		         "event_created_dtm":"2018-05-24 08:42:20"
+		      }
+		   },
+		   {  
+		      "order_id":"2",
+		      "order_user_id":"4",
+		      "order_event_id":"1",
+		      "order_tickets_info":[  
+		         {  
+		            "ticket_id":"1",
+		            "amount":"3"
+		         }
+		      ],
+		      "order_stripe_order_id":"or_1CVbzhHkcS2iiDefmSV4W0Wh",
+		      "order_status":"paid",
+		      "order_created_dtm":"2018-05-25 06:13:53",
+		      "order":{  
+		         "event_id":"1",
+		         "event_title":"test Event Title",
+		         "event_description":"Our currency rankings show that the most popular Euro exchange rate is the USD to EUR rate. The currency code for Euros is EUR, and the currency symbol is \u20ac.",
+		         "event_image":"http:\/\/192.168.0.62\/assets\/uploads\/event_image\/test.png",
+		         "event_start_date_time":"2018-05-17 03:00:10",
+		         "event_end_date_time":"2018-05-17 04:00:10",
+		         "event_address1":"NYC rails 1234",
+		         "event_address_2":"New York city , United States",
+		         "event_lat":"17.845098",
+		         "event_long":"-29.330223",
+		         "event_org_id":"1",
+		         "stripe_product_id":"prod_Cv8699nAcW9LNb",
+		         "event_created_dtm":"2018-05-24 08:42:20"
+		      }
+		   }
+		]

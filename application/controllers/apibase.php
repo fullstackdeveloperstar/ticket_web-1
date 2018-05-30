@@ -11,6 +11,7 @@ class Apibase extends CI_Controller
         $this->load->model('user_model');
         $this->load->model('org_model');
         $this->load->model('order_model');
+        $this->load->model('event_model');
 
         $headers = $this->input->request_headers();
 

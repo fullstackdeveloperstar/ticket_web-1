@@ -594,13 +594,13 @@ class Apiticket extends Apibase
                 exit();          
             }
 
-            if($event['event_org_id'] != $this->user['user_org_id'])
-            {
-                $data['success'] = false;
-                $data['msg'] = "Your permission is not allowed!";
-                echo json_encode($data);
-                exit();
-            }
+            // if($event['event_org_id'] != $this->user['user_org_id'])
+            // {
+            //     $data['success'] = false;
+            //     $data['msg'] = "Your permission is not allowed!".$event['event_org_id']." ".$this->user['user_org_id'];
+            //     echo json_encode($data);
+            //     exit();
+            // }
 
             $this->order_model->check($order['order_id']);
 
