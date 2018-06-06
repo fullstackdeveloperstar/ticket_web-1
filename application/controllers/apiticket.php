@@ -325,7 +325,17 @@ class Apiticket extends Apibase
         //Process the JSON.
         $items = $decoded['items'];
         $temp_items = $items;
-        
+        $folder_name = "";
+        if(!isset($decoded['folder_name']) || $decoded['folder_name'] == null || $decoded['folder_name'] == "")
+        {
+            $data['success'] = false;
+            $data['msg'] = 'Folder name is missing';
+            echo json_encode($data);
+            exit();
+        } else {
+            $folder_name = $decoded['folder_name'];
+        }
+
         if(count($items) == 0)
         {
             $data['success'] = false;
@@ -411,14 +421,16 @@ class Apiticket extends Apibase
 
         $order = $this->orders($orderinfo);
 
+
         $order_data['order_stripe_order_id'] = $order['id'];
         $order_data['order_user_id'] = $this->user['userId'];
         $order_data['order_tickets_info'] = json_encode($temp_items);
         $order_data['order_event_id'] = $event_id;
+        $order_data['order_folder_name'] = $folder_name;
         $ordered_id = $this->order_model->addOrder($order_data);
         
         $get_order = $this->order_model->getOrder($ordered_id);
-        
+        $get_order['success'] = true;
         $get_order['order_tickets_info'] = json_decode($get_order['order_tickets_info']);
         echo json_encode($get_order);
         
@@ -601,6 +613,22 @@ class Apiticket extends Apibase
             //     echo json_encode($data);
             //     exit();
             // }
+
+            if($order['order_status'] == "checked")
+            {
+                $data['success'] = false;
+                $data['msg'] = "This order is already checked!";
+                echo json_encode($data);
+                exit();  
+            }
+
+            if($order['order_status'] == "paid")
+            {
+                $data['success'] = false;
+                $data['msg'] = "This order is already paid!";
+                echo json_encode($data);
+                exit();  
+            }
 
             $this->order_model->check($order['order_id']);
 

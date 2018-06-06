@@ -27,7 +27,7 @@ class Apiorder extends Apibase
 
         foreach ($orders as $key => $order) {
             $event_temp = $this->event_model->getEvent($order['order_event_id']);
-            $orders[$key]['order'] = $event_temp;
+            $orders[$key]['event'] = $event_temp;
             $orders[$key]['order_tickets_info'] = json_decode($order['order_tickets_info']);
         }
 
