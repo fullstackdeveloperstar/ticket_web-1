@@ -325,15 +325,15 @@ class Apiticket extends Apibase
         //Process the JSON.
         $items = $decoded['items'];
         $temp_items = $items;
-        $folder_name = "";
-        if(!isset($decoded['folder_name']) || $decoded['folder_name'] == null || $decoded['folder_name'] == "")
+        $holder_name = "";
+        if(!isset($decoded['holder_name']) || $decoded['holder_name'] == null || $decoded['holder_name'] == "")
         {
             $data['success'] = false;
-            $data['msg'] = 'Folder name is missing';
+            $data['msg'] = 'Holder name is missing';
             echo json_encode($data);
             exit();
         } else {
-            $folder_name = $decoded['folder_name'];
+            $folder_name = $decoded['holder_name'];
         }
 
         if(count($items) == 0)
@@ -426,7 +426,7 @@ class Apiticket extends Apibase
         $order_data['order_user_id'] = $this->user['userId'];
         $order_data['order_tickets_info'] = json_encode($temp_items);
         $order_data['order_event_id'] = $event_id;
-        $order_data['order_folder_name'] = $folder_name;
+        $order_data['order_holder_name'] = $holder_name;
         $ordered_id = $this->order_model->addOrder($order_data);
         
         $get_order = $this->order_model->getOrder($ordered_id);

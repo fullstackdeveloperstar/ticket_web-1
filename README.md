@@ -757,7 +757,7 @@ order ticket
 				}
 			],
 			"event_id":"1",
-			"folder_name":"test"
+			"holder_name":"test"
 		}
 	-response
 		{  
@@ -807,7 +807,7 @@ Order apis
 		[  
 		   {  
 		      "order_id":"1",
-		      "order_folder_name":"",
+		      "order_holder_name":"",
 		      "order_user_id":"4",
 		      "order_event_id":"1",
 		      "order_tickets_info":[  
@@ -837,7 +837,7 @@ Order apis
 		   },
 		   {  
 		      "order_id":"2",
-		      "order_folder_name":"",
+		      "order_holder_name":"",
 		      "order_user_id":"4",
 		      "order_event_id":"1",
 		      "order_tickets_info":[  
