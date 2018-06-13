@@ -333,7 +333,7 @@ class Apiticket extends Apibase
             echo json_encode($data);
             exit();
         } else {
-            $folder_name = $decoded['holder_name'];
+            $holder_name = $decoded['holder_name'];
         }
 
         if(count($items) == 0)

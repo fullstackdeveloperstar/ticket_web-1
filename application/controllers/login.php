@@ -66,7 +66,8 @@ class Login extends CI_Controller
                                             'role'=>$res->roleId,
                                             'roleText'=>$res->role,
                                             'name'=>$res->name,
-                                            'isLoggedIn' => TRUE
+                                            'isLoggedIn' => TRUE,
+                                            'user_token' => $res->user_token
                                     );
                                     
                     $this->session->set_userdata($sessionArray);

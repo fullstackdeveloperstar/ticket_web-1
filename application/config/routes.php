@@ -80,3 +80,7 @@ $route['stripe_test/orderpay'] = 'stripe/order_pay';
 $route['api/isloggedin'] = "apilogin/isLoggedIn";
 $route['api'] = 'Apiuser/index';
 // $route['sendmail'] = "apilogin/sendEmail";
+
+// admin apis
+
+$route['api/admin/user/userinfo'] = "apiadminuser/index";

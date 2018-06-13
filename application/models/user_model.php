@@ -214,6 +214,20 @@ class User_model extends CI_Model
             return false;
         }
     }
+
+    function getUserList()
+    {
+        $this->db->where('roleId !=', 1);
+        $query = $this->db->get($this->table_name);
+
+        $result = $query->result_array();
+        if(count($result) == 0)
+        {
+            return false;
+        }
+
+        return $result;
+    }
 }
 
   

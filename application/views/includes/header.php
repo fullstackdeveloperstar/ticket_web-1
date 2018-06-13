@@ -23,10 +23,23 @@
     </style>
     <!-- jQuery 2.1.4 -->
     <script src="<?php echo base_url(); ?>assets/js/jQuery-2.1.4.min.js"></script>
+    <script src="<?php echo base_url(); ?>assets/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+    <script src="<?php echo base_url(); ?>assets/dist/js/app.min.js" type="text/javascript"></script>
+    <script src="<?php echo base_url(); ?>assets/js/jquery.validate.js" type="text/javascript"></script>
+    <script src="<?php echo base_url(); ?>assets/js/validation.js" type="text/javascript"></script>
     <script type="text/javascript">
         var baseURL = "<?php echo base_url(); ?>";
+        var user_token =  "<?=$this->session->userdata('user_token')?>";
     </script>
-    
+    <?php
+      if($role == ROLE_ADMIN)
+      {
+        ?>
+        <script src="<?php echo base_url(); ?>assets/js/admin/urls.js"></script>
+        <script src="<?php echo base_url(); ?>assets/js/admin/global.js"></script>
+        <?php
+      }
+    ?>    
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -56,16 +69,16 @@
               <!-- User Account: style can be found in dropdown.less -->
               <li class="dropdown user user-menu">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                  <img src="<?php echo base_url(); ?>assets/dist/img/avatar.png" class="user-image" alt="User Image"/>
-                  <span class="hidden-xs"><?php echo $name; ?></span>
+                  <img src="" id="header-user-avatar" class="user-image" alt="User Image"/>
+                  <span class="hidden-xs" id="header-user-name"></span>
                 </a>
                 <ul class="dropdown-menu">
                   <!-- User image -->
                   <li class="user-header">
-                    <img src="<?php echo base_url(); ?>assets/dist/img/avatar.png" class="img-circle" alt="User Image" />
+                    <img src="" id="header-user-avatar1" class="img-circle" alt="User Image" />
                     <p>
-                      <?php echo $name; ?>
-                      <small><?php echo $role_text; ?></small>
+                      <span id="header-user-name1"></span>
+                      <!-- <small><?php echo $role_text; ?></small> -->
                     </p>
                   </li>
                   <!-- Menu Footer-->
