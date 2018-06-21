@@ -173,11 +173,12 @@ class Apiticket extends Apibase
           );
 
         try{
+
             \Stripe\Stripe::setApiKey($stripe['secret_key']);
             $sku_info = \Stripe\SKU::create(array(
               "product" => $product,
               "attributes" => array(
-                "type" => "sku_".$event_id."_".$type,
+                "type" => "sku_".$event_id."_".$type."_".uniqid(),
               ),
               "price" => $price,
               "currency" => "usd",
@@ -191,23 +192,23 @@ class Apiticket extends Apibase
         }
           catch (\Stripe\Error\RateLimit $e) {
             // Too many requests made to the API too quickly
-          
+            // var_dump($e);
           } catch (\Stripe\Error\InvalidRequest $e) {
             // Invalid parameters were supplied to Stripe's API
-          
+          // var_dump($e);
           } catch (\Stripe\Error\Authentication $e) {
             // Authentication with Stripe's API failed
             // (maybe you changed API keys recently)
-           
+           // var_dump($e);
           } catch (\Stripe\Error\ApiConnection $e) {
             // Network communication with Stripe failed
-            
+            // var_dump($e);
           } catch (\Stripe\Error\Base $e) {
             // Display a very generic error to the user, and maybe send
             // yourself an email
-            
+            // var_dump($e);
           } catch (Exception $e) {
-            
+            // var_dump($e);
           }     
           // end create product
 
