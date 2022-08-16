@@ -21,7 +21,7 @@ class Email_model extends CI_Model
 		$mail->Port = 465; // or 587
 		$mail->IsHTML(true);
 		$mail->Username = "rubby.star.sg@gmail.com";
-		$mail->Password = "soksunae";
+		$mail->Password = "***";
 		$mail->SetFrom("rubby.star.sg@gmail.com");
 		$mail->Subject = $subject;
 		$mail->Body = $body;
